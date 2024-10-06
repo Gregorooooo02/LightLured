@@ -123,67 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &83406682 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5844255931708058833, guid: e5fc759eab44341bdba454a49511d2f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 3002126258493768599}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &83406684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83406682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b984c0e74a01249e99136416848a74d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canSprint: 1
-  canCrouch: 1
-  sprintKey: 304
-  crouchKey: 306
-  walkSpeed: 3
-  sprintSpeed: 6
-  crouchSpeed: 1.5
-  gravity: 30
-  lookSpeedX: 2
-  lookSpeedY: 2
-  upperLookLimit: 80
-  lowerLookLimit: 80
-  crouchHeight: 1.5
-  standingHeight: 2
-  timeToCrouch: 0.25
-  crouchingCenter: {x: 0, y: 0.25, z: 0}
-  standingCenter: {x: 0, y: 0, z: 0}
---- !u!143 &83406685
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83406682}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,18 +446,9 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 2146946767179792633, guid: e5fc759eab44341bdba454a49511d2f3, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5844255931708058833, guid: e5fc759eab44341bdba454a49511d2f3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 83406684}
-    - targetCorrespondingSourceObject: {fileID: 5844255931708058833, guid: e5fc759eab44341bdba454a49511d2f3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 83406685}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5fc759eab44341bdba454a49511d2f3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
