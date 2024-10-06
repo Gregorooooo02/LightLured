@@ -141,12 +141,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b984c0e74a01249e99136416848a74d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canSprint: 1
+  canCrouch: 1
+  sprintKey: 304
+  crouchKey: 306
   walkSpeed: 3
+  sprintSpeed: 6
+  crouchSpeed: 1.5
   gravity: 30
   lookSpeedX: 2
   lookSpeedY: 2
   upperLookLimit: 80
   lowerLookLimit: 80
+  crouchHeight: 1.5
+  standingHeight: 2
+  timeToCrouch: 0.25
+  crouchingCenter: {x: 0, y: 0.25, z: 0}
+  standingCenter: {x: 0, y: 0, z: 0}
 --- !u!143 &83406685
 CharacterController:
   m_ObjectHideFlags: 0
