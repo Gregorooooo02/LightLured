@@ -1674,6 +1674,26 @@ PrefabInstance:
       propertyPath: lanternLight
       value: 
       objectReference: {fileID: 475830739}
+    - target: {fileID: 2341876211969464782, guid: ad34d8b50023749e7ae05e0e4078411a,
+        type: 3}
+      propertyPath: fasterChaseSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341876211969464782, guid: ad34d8b50023749e7ae05e0e4078411a,
+        type: 3}
+      propertyPath: minimumWanderRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047138554621100426, guid: ad34d8b50023749e7ae05e0e4078411a,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047138554621100426, guid: ad34d8b50023749e7ae05e0e4078411a,
+        type: 3}
+      propertyPath: m_AngularSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
