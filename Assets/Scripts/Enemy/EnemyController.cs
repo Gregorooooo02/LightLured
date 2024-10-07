@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,7 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent agent;
     
     [SerializeField] private Transform target;
+    private bool isWandering;
 
     [Header("Lantern")]
     [SerializeField] private Light lanternLight;
@@ -38,6 +40,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start() {
         StartCoroutine(Wander());
+        isWandering = false;
     }
 
     private void Update() {
@@ -46,14 +49,21 @@ public class EnemyController : MonoBehaviour
 
         if (isLanternOn) {
             time += Time.deltaTime;
+
+            StopCoroutine(Wander());
+            isWandering = true;
+
             ChasePlayer(distanceToTarget);
         }
-        else {
+        else if (isWandering && !isLanternOn) {
             StartCoroutine(Wander());
+            // This is to prevent the coroutine from running multiple times
+            isWandering = false;
         }
     }
 
     private void ChasePlayer(float distanceToTarget) {
+        agent.acceleration = 40f;
         if (distanceToTarget <= chaseRange) {
             agent.SetDestination(target.position);
         }
@@ -72,31 +82,23 @@ public class EnemyController : MonoBehaviour
 
     // Wandering should be a coroutine that runs every few seconds
     private IEnumerator Wander() {
-        // Wait for a few seconds before wandering again
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(Random.Range(3f, 6f));
         agent.speed = wanderSpeed;
+        agent.acceleration = 8f;
         time = 0.0f;
 
         while (true) {
-            Vector3 randomDirection = Random.insideUnitSphere * wanderRange;
+            Vector2 randomDirection = Random.insideUnitCircle * (wanderRange - minimumWanderRange);
 
             if (randomDirection.magnitude < minimumWanderRange) {
                 randomDirection = randomDirection.normalized * minimumWanderRange;
             }
 
-            randomDirection += transform.position;
+            randomDirection += new Vector2(transform.position.x, transform.position.z);
 
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomDirection, out hit, wanderRange, 1)) {
-                Vector3 finalPosition = hit.position;
-                agent.SetDestination(finalPosition);
+            agent.SetDestination(new Vector3(randomDirection.x, transform.position.y, randomDirection.y));
 
-                while (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance) {
-                    yield return null;
-                }
-
-                yield return new WaitForSeconds(1f);
-            }
+            yield return new WaitForSeconds(Random.Range(3f, 6f));
         }
     }
 

@@ -1671,6 +1671,11 @@ PrefabInstance:
       objectReference: {fileID: 182436767}
     - target: {fileID: 2341876211969464782, guid: ad34d8b50023749e7ae05e0e4078411a,
         type: 3}
+      propertyPath: wanderRange
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341876211969464782, guid: ad34d8b50023749e7ae05e0e4078411a,
+        type: 3}
       propertyPath: lanternLight
       value: 
       objectReference: {fileID: 475830739}
@@ -1682,7 +1687,7 @@ PrefabInstance:
     - target: {fileID: 2341876211969464782, guid: ad34d8b50023749e7ae05e0e4078411a,
         type: 3}
       propertyPath: minimumWanderRange
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4047138554621100426, guid: ad34d8b50023749e7ae05e0e4078411a,
         type: 3}
