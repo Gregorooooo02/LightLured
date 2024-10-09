@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.ComponentModel;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -63,7 +63,7 @@ public class EnemyController : MonoBehaviour
     }
 
     private void ChasePlayer(float distanceToTarget) {
-        agent.acceleration = 40f;
+        agent.acceleration = 20f;
         if (distanceToTarget <= chaseRange) {
             agent.SetDestination(target.position);
         }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2341876211969464782}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,9 +120,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 10
+  m_Acceleration: 40
   avoidancePriority: 50
-  m_AngularSpeed: 100
+  m_AngularSpeed: 10
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
@@ -148,11 +148,11 @@ MonoBehaviour:
   aggroTime: 5
   time: 0
   chaseRange: 1000
-  fasterChaseRange: 12
-  attackRange: 3
-  wanderRange: 10
+  fasterChaseRange: 7
+  attackRange: 2
+  wanderRange: 8
   minimumWanderRange: 3
   chaseSpeed: 5
-  fasterChaseSpeed: 10
-  attackSpeed: 12
+  fasterChaseSpeed: 15
+  attackSpeed: 20
   wanderSpeed: 3

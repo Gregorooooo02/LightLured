@@ -370,7 +370,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 0.01
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1671,33 +1671,13 @@ PrefabInstance:
       objectReference: {fileID: 182436767}
     - target: {fileID: 2341876211969464782, guid: ad34d8b50023749e7ae05e0e4078411a,
         type: 3}
-      propertyPath: wanderRange
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341876211969464782, guid: ad34d8b50023749e7ae05e0e4078411a,
-        type: 3}
       propertyPath: lanternLight
       value: 
       objectReference: {fileID: 475830739}
-    - target: {fileID: 2341876211969464782, guid: ad34d8b50023749e7ae05e0e4078411a,
-        type: 3}
-      propertyPath: fasterChaseSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341876211969464782, guid: ad34d8b50023749e7ae05e0e4078411a,
-        type: 3}
-      propertyPath: minimumWanderRange
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4047138554621100426, guid: ad34d8b50023749e7ae05e0e4078411a,
         type: 3}
       propertyPath: m_Acceleration
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4047138554621100426, guid: ad34d8b50023749e7ae05e0e4078411a,
-        type: 3}
-      propertyPath: m_AngularSpeed
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
