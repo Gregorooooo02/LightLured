@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
+  m_Name: Block Lite Size Fade
+  m_EditorClassIdentifier: 
+  m_functionInfo: "// Made with Amplify Shader Editor v1.9.6.3\n// Available at the
+    Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19603\nNode;AmplifyShaderEditor.RangedFloatNode;196;-2944,-2816;Half;False;Property;_SizeFadeElementMode;Use
+    Form Globals / Elements;8;0;Create;False;0;0;0;False;2;Space(10);StyledToggle;False;0;1;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;182;-2944,-2944;Half;False;Property;_SizeFadeCategory;[
+    Size Fade Category ];0;0;Create;True;0;0;0;False;1;StyledCategory(Size Fade Settings,
+    true, 0, 10);False;1;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;204;-2944,-2880;Half;False;Property;_SizeFadeEnd;[
+    Size Fade End ];9;0;Create;True;0;0;0;False;1;StyledSpace(10);False;1;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;185;-2944,-2560;Half;False;Property;_SizeFadeIntensityValue;Size
+    Fade Intensity;3;0;Create;False;0;0;0;False;0;False;0;1;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;205;-2944,-2432;Half;False;Property;_SizeFadeScaleValue;Size
+    Fade Scale;5;0;Create;False;0;0;0;False;0;False;1;0;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;203;-2944,-2496;Half;False;Property;_SizeFadeScaleMode;Size
+    Fade Mode;4;1;[Enum];Create;False;0;2;All Axis;0;Y Axis;1;0;False;0;False;0;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;195;-2560,-2944;Inherit;False;3;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;212;-2560,-2560;Inherit;False;5;5;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;214;-2560,-3328;Inherit;False;2;2;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;1;COLOR;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;217;-2176,-3328;Inherit;False;3;3;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;COLOR;0\nNode;AmplifyShaderEditor.ColorNode;216;-2944,-3264;Half;False;Property;_SizeFadeColoring;#
+    SizeFade Coloring;2;0;Create;True;0;0;0;False;1;StyledColoring;False;1,1,1,0.6;0,0,0,0;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5\nNode;AmplifyShaderEditor.RangedFloatNode;215;-2944,-3328;Half;False;Property;_SizeFadeLiteInfo;#
+    SizeFade Lite Info;1;0;Create;True;0;0;0;False;1;StyledMessage(Warning, The Size
+    Fade feature is only available with The Visual Engine Core package., 0, 10);False;0;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;160;-2944,-2304;Half;False;Property;_SizeFadeDistMinValue;Size
+    Fade Start;6;0;Create;False;0;0;0;False;0;False;0;0;0;1000;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;159;-2944,-2240;Half;False;Property;_SizeFadeDistMaxValue;Size
+    Fade Limit;7;0;Create;False;0;0;0;False;0;False;0;0;0;1000;0;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionOutput;128;-2048,-3328;Inherit;False;True;-1;Dummy
+    Data;0;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0\nWireConnection;195;0;182;0\nWireConnection;195;1;204;0\nWireConnection;195;2;196;0\nWireConnection;212;0;185;0\nWireConnection;212;1;203;0\nWireConnection;212;2;205;0\nWireConnection;212;3;160;0\nWireConnection;212;4;159;0\nWireConnection;214;0;215;0\nWireConnection;214;1;216;0\nWireConnection;217;0;214;0\nWireConnection;217;1;195;0\nWireConnection;217;2;212;0\nWireConnection;128;0;217;0\nASEEND*/\n//CHKSM=4BB5B371AE5BD5DBA3D0D356736C65F8107D29DE"
+  m_functionName: 
+  m_description: 
+  m_additionalIncludes:
+    m_additionalIncludes: []
+    m_outsideIncludes: []
+  m_additionalPragmas:
+    m_additionalPragmas: []
+    m_outsidePragmas: []
+  m_additionalDirectives:
+    m_validData: 0
+    m_isDirty: 0
+    m_moduleName: ' Additional Directives'
+    m_independentModule: 1
+    m_customEdited: 0
+    m_additionalDirectives: []
+    m_shaderFunctionDirectives: []
+    m_nativeDirectives: []
+    m_nativeDirectivesIndex: -1
+    m_nativeDirectivesFoldout: 0
+    m_directivesSaveItems: []
+  m_nodeCategory: 0
+  m_headerStyle: 2
+  m_headerColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+  m_customNodeCategory: The Visual Engine Lite Block
+  m_previewPosition: 0
+  m_hidden: 0
+  m_url: 

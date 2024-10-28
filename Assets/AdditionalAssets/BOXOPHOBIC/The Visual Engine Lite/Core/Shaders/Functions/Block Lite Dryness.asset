@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
+  m_Name: Block Lite Dryness
+  m_EditorClassIdentifier: 
+  m_functionInfo: "// Made with Amplify Shader Editor v1.9.6.3\n// Available at the
+    Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19603\nNode;AmplifyShaderEditor.RangedFloatNode;163;-2432,-4736;Half;False;Property;_DrynessCategory;[
+    Dryness Category ];0;0;Create;True;0;0;0;False;1;StyledCategory(Dryness Settings,
+    true, 0, 10);False;1;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;360;-2432,-4672;Half;False;Property;_DrynessEnd;[
+    Dryness End ];27;0;Create;True;0;0;0;False;1;StyledSpace(10);False;1;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;362;-2432,-4608;Half;False;Property;_DrynessSpace;[
+    Dryness Space ];10;0;Create;True;0;0;0;False;1;StyledSpace(10);False;1;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;344;-2432,-4544;Half;False;Property;_DrynessElementMode;Use
+    Atmo Globals / Elements;26;0;Create;False;0;0;0;False;2;Space(10);StyledToggle;False;1;1;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionSwitch;398;-2176,-4480;Inherit;False;Bake
+    Mode;True;1;2;0;Off;On;Object;-1;10;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;9;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;399;-2432,-4416;Half;False;Property;_DrynessBakeMode;Dryness
+    Baking;4;1;[Enum];Create;False;0;2;Keep Dynamic On Impostors;0;Bake Settings
+    To Impostors;1;0;False;0;False;0;1;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.ColorNode;341;-2432,-4160;Inherit;False;Property;_DrynessColor;Dryness
+    Color;7;2;[HDR];[Gamma];Create;False;0;0;0;False;0;False;1,0.7083712,0.495283,1;0,0,0,0;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5\nNode;AmplifyShaderEditor.SimpleAddOpNode;358;-1792,-4736;Inherit;False;5;5;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;415;-1792,-4224;Inherit;False;6;6;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;1;COLOR;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;418;-1792,-5120;Inherit;False;2;2;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;1;COLOR;0\nNode;AmplifyShaderEditor.ColorNode;419;-2432,-5056;Half;False;Property;_DrynessColoring;#
+    Dryness Coloring;2;0;Create;True;0;0;0;False;1;StyledColoring;False;1,1,1,0.6;0,0,0,0;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5\nNode;AmplifyShaderEditor.RangedFloatNode;328;-2432,-4224;Half;False;Property;_DrynessIntensityValue;Dryness
+    Intensity;3;0;Create;False;0;0;0;False;0;False;0;1;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;420;-2432,-5120;Half;False;Property;_DrynessLiteInfo;#
+    Dryness Lite Info;1;0;Create;True;0;0;0;False;1;StyledMessage(Warning, The Dryness
+    feature is only available with The Visual Engine Core package., 0, 10);False;0;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;417;-896,-5120;Inherit;False;6;6;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;2;COLOR;0,0,0,0;False;3;FLOAT4;0,0,0,0;False;4;FLOAT4;0,0,0,0;False;5;FLOAT;0;False;1;COLOR;0\nNode;AmplifyShaderEditor.RangedFloatNode;307;-2432,-3584;Half;False;Property;_DrynessMultiValue;Dryness
+    Multi Mask;17;0;Create;False;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;388;-2432,-3296;Half;False;Property;_DrynessMeshMode;Dryness
+    Mesh Mask;21;1;[Enum];Create;False;0;4;Vertex R;0;Vertex G;1;Vertex B;2;Vertex
+    A;3;0;False;0;False;3;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.Vector4Node;424;-2432,-3456;Half;False;Property;_DrynessLumaRemap;Dryness
+    Luma Mask;19;0;Create;False;0;0;0;False;1;StyledRemapSlider;False;0,1,0,0;0,1,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.RangedFloatNode;305;-2432,-3520;Half;False;Property;_DrynessLumaValue;Dryness
+    Luma Mask;18;0;Create;False;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.Vector4Node;384;-2432,-3232;Half;False;Property;_DrynessMeshRemap;Dryness
+    Mesh Mask;22;0;Create;False;0;0;0;False;1;StyledRemapSlider;False;0,1,0,0;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.RangedFloatNode;425;-2432,-3072;Half;False;Property;_DrynessMeshValue;Dryness
+    Mesh Mask;20;0;Create;False;0;0;0;False;0;False;0;1;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;416;-1792,-3584;Inherit;False;3;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT4;0,0,0,0;False;1;FLOAT4;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;439;-1792,-3328;Inherit;False;4;4;0;FLOAT;0;False;1;FLOAT4;0,0,0,0;False;2;FLOAT;0;False;3;FLOAT4;0,0,0,0;False;1;FLOAT4;0\nNode;AmplifyShaderEditor.FunctionSwitch;438;-1280,-3328;Inherit;False;Mesh
+    Mask;True;1;2;2;Off;On;Object;-1;10;0;FLOAT;0;False;1;FLOAT4;0,0,0,0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;9;FLOAT;0;False;1;FLOAT4;0\nNode;AmplifyShaderEditor.RangedFloatNode;441;-2432,-3968;Half;False;Property;_DrynessGrayValue;Dryness
+    Gray;5;0;Create;False;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;442;-2432,-3904;Half;False;Property;_DrynessShiftValue;Dryness
+    Shift;6;0;Create;False;0;0;0;False;0;False;0;1;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;422;-2432,-3840;Half;False;Property;_DrynessSmoothnessValue;Dryness
+    Smoothness;9;0;Create;False;0;0;0;False;0;False;0.5;1;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;423;-2432,-3776;Half;False;Property;_DrynessSubsurfaceValue;Dryness
+    Subsurface;8;0;Create;False;0;0;0;False;0;False;0.5;1;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.Vector4Node;371;-2432,-1328;Half;False;Property;_DrynessNoiseRemap;Dryness
+    Noise Mask;23;0;Create;False;0;0;0;False;1;StyledRemapSlider;False;0,0,0,0;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.RangedFloatNode;370;-2432,-1168;Half;False;Property;_DrynessNoiseTillingValue;Dryness
+    Noise Tilling;24;0;Create;False;0;0;0;False;0;False;1;1;0;40;0;1;FLOAT;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;434;-1792,-2688;Inherit;False;3;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT4;0,0,0,0;False;1;FLOAT4;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;437;-1536,-2688;Inherit;False;2;2;0;FLOAT4;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;FLOAT4;0\nNode;AmplifyShaderEditor.SamplerNode;431;-2176,-2304;Inherit;True;Property;_TextureSample0;Texture
+    Sample 0;22;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5\nNode;AmplifyShaderEditor.SimpleAddOpNode;435;-1792,-2304;Inherit;False;3;3;0;COLOR;0,0,0,0;False;1;FLOAT4;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0\nNode;AmplifyShaderEditor.RangedFloatNode;428;-2432,-2624;Half;False;Property;_DrynessMaskCoordMode;Mask
+    UV Mode;13;1;[Enum];Create;False;0;2;Tilling And Offset;0;Scale And Offset;1;0;False;0;False;0;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.Vector4Node;429;-2432,-2560;Half;False;Property;_DrynessMaskCoordValue;Mask
+    UV Value;14;0;Create;False;0;0;0;False;1;StyledVector(9);False;1,1,0,0;2,2,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.TexturePropertyNode;430;-2432,-2304;Inherit;True;Property;_DrynessMaskTex;Dryness
+    Mask;11;0;Create;False;0;0;0;False;1;StyledTextureSingleLine;False;None;None;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1\nNode;AmplifyShaderEditor.RangedFloatNode;433;-2432,-1888;Half;False;Property;_DrynessMaskValue;Dryness
+    TexG Mask;15;0;Create;False;0;3;Main Shader B;0;Layer Shader B;1;Layer Mask B;2;0;False;0;False;0;0;0;1;0;1;FLOAT;0\nNode;AmplifyShaderEditor.Vector4Node;432;-2432,-2048;Half;False;Property;_DrynessMaskRemap;Dryness
+    TexG Mask;16;0;Create;False;0;0;0;False;1;StyledRemapSlider;False;0,1,0,0;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.FunctionSwitch;440;-1280,-2688;Inherit;False;Tex
+    Mask;True;0;2;1;Off;On;Object;-1;10;0;FLOAT;0;False;1;FLOAT4;0,0,0,0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;9;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;427;-2432,-2688;Half;False;Property;_DrynessMaskSampleMode;Mask
+    Sampling;12;1;[Enum];Create;False;0;2;Main UV;0;Extra UV;1;0;False;1;Space(10);False;0;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.Vector4Node;443;-2432,-2976;Half;False;Property;_DrynessBlendRemap;Dryness
+    Blend Mask;25;0;Create;False;0;0;0;False;1;StyledRemapSlider;False;0.1,0.2,0,0;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.FunctionOutput;346;-640,-5120;Inherit;False;True;-1;Dummy
+    Data;0;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0\nWireConnection;398;1;399;0\nWireConnection;358;0;163;0\nWireConnection;358;1;360;0\nWireConnection;358;2;362;0\nWireConnection;358;3;344;0\nWireConnection;358;4;398;0\nWireConnection;415;0;328;0\nWireConnection;415;1;341;0\nWireConnection;415;2;441;0\nWireConnection;415;3;442;0\nWireConnection;415;4;422;0\nWireConnection;415;5;423;0\nWireConnection;418;0;420;0\nWireConnection;418;1;419;0\nWireConnection;417;0;418;0\nWireConnection;417;1;358;0\nWireConnection;417;2;415;0\nWireConnection;417;3;416;0\nWireConnection;417;4;438;0\nWireConnection;417;5;440;0\nWireConnection;416;0;307;0\nWireConnection;416;1;305;0\nWireConnection;416;2;424;0\nWireConnection;439;0;388;0\nWireConnection;439;1;384;0\nWireConnection;439;2;425;0\nWireConnection;439;3;443;0\nWireConnection;438;1;439;0\nWireConnection;434;0;427;0\nWireConnection;434;1;428;0\nWireConnection;434;2;429;0\nWireConnection;437;0;434;0\nWireConnection;437;1;435;0\nWireConnection;431;0;430;0\nWireConnection;435;0;431;0\nWireConnection;435;1;432;0\nWireConnection;435;2;433;0\nWireConnection;440;1;437;0\nWireConnection;346;0;417;0\nASEEND*/\n//CHKSM=22979217C63C41CDBBF8B80C2491C04F19DA7912"
+  m_functionName: 
+  m_description: 
+  m_additionalIncludes:
+    m_additionalIncludes: []
+    m_outsideIncludes: []
+  m_additionalPragmas:
+    m_additionalPragmas: []
+    m_outsidePragmas: []
+  m_additionalDirectives:
+    m_validData: 0
+    m_isDirty: 0
+    m_moduleName: ' Additional Directives'
+    m_independentModule: 1
+    m_customEdited: 0
+    m_additionalDirectives: []
+    m_shaderFunctionDirectives: []
+    m_nativeDirectives: []
+    m_nativeDirectivesIndex: -1
+    m_nativeDirectivesFoldout: 0
+    m_directivesSaveItems: []
+  m_nodeCategory: 0
+  m_headerStyle: 2
+  m_headerColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+  m_customNodeCategory: The Visual Engine Lite Block
+  m_previewPosition: 0
+  m_hidden: 0
+  m_url: 

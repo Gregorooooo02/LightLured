@@ -1,0 +1,52 @@
+*******************************************************************
+*                             INFO                                *
+*******************************************************************
+
+InfoTitle The Visual Engine Lite
+InfoPreset Use this preset to convert assets using the Vegetation Engine Lite shaders. Please note, the conversion is not necessary, you can simply switch the sahders!
+InfoStatus ● ● ● ● ●
+//InfoOnline https://www.evolved-software.com/treeit/treeit
+
+*******************************************************************
+*                             PRESET                              *
+*******************************************************************
+
+OutputTransforms USE_ORIGINAL_TRANSFORMS
+
+Mesh SetRed GET_MASK_FROM_CHANNEL 0
+Mesh SetGreen GET_MASK_FROM_CHANNEL 1
+Mesh SetBlue GET_MASK_FROM_CHANNEL 2
+Mesh SetAlpha GET_MASK_FROM_CHANNEL 3
+
+Mesh SetExtraCoord GET_MASK_FROM_CHANNEL 2
+Mesh SetPivots GET_MASK_FROM_CHANNEL 2
+
+*******************************************************************
+
+if SHADER_NAME_CONTAINS Geomerty
+{
+	if SHADER_NAME_CONTAINS Standard
+	{
+		Material SET_SHADER SHADER_STANDARD
+	}
+
+	if SHADER_NAME_CONTAINS Subsurface
+	{
+		Material SET_SHADER SHADER_SUBSURFACE
+	}
+}
+
+if SHADER_NAME_CONTAINS Impostors
+{
+	if SHADER_NAME_CONTAINS Standard
+	{
+		Material SET_SHADER_BY_NAME BOXOPHOBIC/The Visual Engine/Impostors/Octa Standard Lit
+	}
+
+	if SHADER_NAME_CONTAINS Subsurface
+	{
+		Material SET_SHADER_BY_NAME BOXOPHOBIC/The Visual Engine/Impostors/Octa Subsurface Lit
+	}
+}
+
+
