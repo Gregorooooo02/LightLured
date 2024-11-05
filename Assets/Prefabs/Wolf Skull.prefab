@@ -4888,7 +4888,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -4940,7 +4940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 1
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -4960,17 +4960,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 80612b40bc88a42e0bdecc0e843953cc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3364965
+      value: 1.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 80612b40bc88a42e0bdecc0e843953cc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7500024
+      value: 0.854
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 80612b40bc88a42e0bdecc0e843953cc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.1384845
+      value: -10.221
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 80612b40bc88a42e0bdecc0e843953cc,
         type: 3}

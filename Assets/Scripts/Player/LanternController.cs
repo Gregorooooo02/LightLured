@@ -31,9 +31,9 @@ public class LanternController : MonoBehaviour
             lantern.GetComponent<Light>().enabled = !lantern.GetComponent<Light>().enabled;
 
             if (lantern.GetComponent<Light>().enabled) {
-                lantern.GetComponent<Renderer>().material = litMaterial;
+                lantern.GetComponent<Renderer>().materials[2] = litMaterial;
             } else {
-                lantern.GetComponent<Renderer>().material = unlitMaterial;
+                lantern.GetComponent<Renderer>().materials[2] = unlitMaterial;
             }
         }
     }
