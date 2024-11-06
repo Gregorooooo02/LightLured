@@ -18,7 +18,10 @@ public class SkullBehaviour : MonoBehaviour
     }
 
     private void CheckLantern() {
-        isLanternOn = lanternLight.enabled;
+        if (lanternLight.intensity > 0)
+            isLanternOn = true;
+        else
+            isLanternOn = false;
 
         if (isLanternOn) {
             meshRenderer.layer = 30;

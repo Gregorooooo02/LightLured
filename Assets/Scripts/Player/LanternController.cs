@@ -5,6 +5,9 @@ using UnityEngine;
 public class LanternController : MonoBehaviour
 {
     private GameObject lantern;
+    private GameObject[] lanternLights;
+
+    private bool lanternOn = true;
 
     [Header("Functional Options")]
     [SerializeField] private bool turnOnOffLantern = true;
@@ -12,29 +15,57 @@ public class LanternController : MonoBehaviour
     [Header("Controls")]
     [SerializeField] private KeyCode toggleLanternKey = KeyCode.F;
 
-    [Header("Materials")]
-    [SerializeField] private Material litMaterial;
-    [SerializeField] private Material unlitMaterial;
+    [Header("Light Settings")]
+    [SerializeField] private Light lanternLight;
+    [SerializeField] private Light additionalLight;
+    [SerializeField] private float transitionSpeed = 2f;
+    [SerializeField] private float lanternLightIntensity = 30f;
+    [SerializeField] private float additionalLightIntensity = 1f;
+
+    private Coroutine lightCoroutine;
+    private Coroutine additionalLightCoroutine;
 
     private void Awake() {
         lantern = GameObject.Find("Lantern");
+        lanternLights = GameObject.FindGameObjectsWithTag("LanternLight");
     }
 
     private void Update() {
         if (turnOnOffLantern) {
-            HandleLanternLight();    
+            HandleLanternLight();
         }
     }
 
     private void HandleLanternLight() {
         if (Input.GetKeyDown(toggleLanternKey)) {
-            lantern.GetComponent<Light>().enabled = !lantern.GetComponent<Light>().enabled;
+            lanternOn = !lanternOn;
 
-            if (lantern.GetComponent<Light>().enabled) {
-                lantern.GetComponent<Renderer>().materials[2] = litMaterial;
-            } else {
-                lantern.GetComponent<Renderer>().materials[2] = unlitMaterial;
+            if (lightCoroutine != null) {
+                StopCoroutine(lightCoroutine);
             }
+
+            if (additionalLightCoroutine != null) {
+                StopCoroutine(additionalLightCoroutine);
+            }
+
+            if (lanternOn) {
+                lightCoroutine = StartCoroutine(GradualLightChange(lanternLight, lanternLightIntensity));
+                additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, additionalLightIntensity));
+            } else {
+                lightCoroutine = StartCoroutine(GradualLightChange(lanternLight, 0f));
+                additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, 0f));
+            }
+        }
+    }
+
+    private IEnumerator GradualLightChange(Light light, float targetIntensity) {
+        float startIntensity = light.intensity;
+        float time = 0f;
+
+        while (time < 1f) {
+            time += Time.deltaTime * transitionSpeed;
+            light.intensity = Mathf.Lerp(startIntensity, targetIntensity, time);
+            yield return null;
         }
     }
 }
