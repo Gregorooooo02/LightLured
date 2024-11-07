@@ -229,8 +229,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnOnOffLantern: 1
   toggleLanternKey: 102
-  litMaterial: {fileID: 2100000, guid: 44ca17743eecf450e958c96f83a3d871, type: 2}
-  unlitMaterial: {fileID: 2100000, guid: 41706e6d7f624486bb148fe78597d5b3, type: 2}
+  lanternLight: {fileID: 4308231963759554607}
+  additionalLight: {fileID: 5033823125412387342}
+  transitionSpeed: 6
+  lanternLightIntensity: 30
+  additionalLightIntensity: 1
 --- !u!1 &6653897531552022946
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +261,7 @@ Transform:
   m_GameObject: {fileID: 6653897531552022946}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.097, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -620,7 +623,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1484851787024353377, guid: 00fb30444464b44d4902ae214e636338, type: 3}
     - {fileID: 2323399233873970638, guid: 00fb30444464b44d4902ae214e636338, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2249634012082799704, guid: 00fb30444464b44d4902ae214e636338, type: 3}
+    - {fileID: 4256392846443692264, guid: 00fb30444464b44d4902ae214e636338, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5619423915010730979, guid: 00fb30444464b44d4902ae214e636338,
         type: 3}
