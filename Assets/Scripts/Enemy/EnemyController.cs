@@ -9,13 +9,13 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent agent;
     
     [SerializeField] private Transform target;
-    private bool isWandering;
 
     [Header("Lantern")]
     [SerializeField] private Light lanternLight;
     [SerializeField] private float aggroTime = 6.0f;
     [SerializeField] private float time = 0.0f;
-    private bool isLanternOn;
+    [SerializeField] private float timeToTarget = 0.0f;
+    private float lanternIntensity;
 
     [Header("Ranges")]
     [SerializeField] private float chaseRange = 1000000f;
@@ -27,14 +27,20 @@ public class EnemyController : MonoBehaviour
     [Header("Speeds")]
     [SerializeField] private float chaseSpeed = 5f;
     [SerializeField] private float fasterChaseSpeed = 10f;
-    [SerializeField] private float attackSpeed = 15f;
     [SerializeField] private float wanderSpeed = 2f;
+
+    [Header("Booleans")]
+    private bool isWandering = false;
+    public bool isTargetingPlayer = false;
+    public bool isWanderingPlayer = false;
+    public bool isChasingPlayer = false;
+    public bool isFasterChasingPlayer = false;
+
+    [SerializeField] private bool isScreamingCoroutine = false;
 
     private void Awake() {
         agent = GetComponent<NavMeshAgent>();
-        
-        isLanternOn = lanternLight.enabled;
-
+        lanternIntensity = lanternLight.intensity;
         agent.speed = wanderSpeed;
     }
 
@@ -45,62 +51,124 @@ public class EnemyController : MonoBehaviour
 
     private void Update() {
         float distanceToTarget = Vector3.Distance(target.position, transform.position);
-        isLanternOn = lanternLight.enabled;
+        bool isLanternOn = lanternLight.intensity > 0;
 
         if (isLanternOn) {
-            time += Time.deltaTime;
+            timeToTarget += Time.deltaTime;
 
-            StopCoroutine(Wander());
-            isWandering = true;
+            float timeToAggro = Random.Range(3f, 6f);
 
-            ChasePlayer(distanceToTarget);
+            if (timeToTarget >= timeToAggro / 1.5f) {
+                // Agent should stop moving when it's targeting the player
+                StopCoroutine(Wander());
+                agent.SetDestination(transform.position);
+                isWanderingPlayer = false;
+            }
+            if (timeToTarget >= timeToAggro && !isScreamingCoroutine) {
+                StartCoroutine(ScreamAndTarget());
+                isWandering = true;
+            }
+
+            if (isScreamingCoroutine) {
+                ChasePlayer(distanceToTarget);
+            }
         }
         else if (isWandering && !isLanternOn) {
             StartCoroutine(Wander());
+            isWanderingPlayer = false;
             // This is to prevent the coroutine from running multiple times
             isWandering = false;
+
+            isTargetingPlayer = false;
+            isChasingPlayer = false;
+            isFasterChasingPlayer = false;
+
+            isScreamingCoroutine = false;
+
+            timeToTarget = 0.0f;
+            time = 0.0f;
         }
+    }
+
+    private IEnumerator ScreamAndTarget() {
+        isTargetingPlayer = true;
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+
+        yield return new WaitForSeconds(1f);
+
+        isScreamingCoroutine = true;
+
+        yield return new WaitForSeconds(1f);
     }
 
     private void ChasePlayer(float distanceToTarget) {
         agent.acceleration = 20f;
+        
+        // Rotate the enemy to face the player in the X and Z axes
+        // Make sure the enemy is not looking up or down
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+
+        time += Time.deltaTime;
+
         if (distanceToTarget <= chaseRange) {
             agent.SetDestination(target.position);
+            transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
         }
 
-        if (distanceToTarget <= fasterChaseRange) {
+        if (distanceToTarget <= fasterChaseRange || time >= aggroTime) {
             agent.speed = fasterChaseSpeed;
+            isFasterChasingPlayer = true;
         } else {
             agent.speed = chaseSpeed;
-        }
-
-        // If the aggro time is up, start chasing faster
-        if (time >= aggroTime) {
-            agent.speed = fasterChaseSpeed;
+            isChasingPlayer = true;
         }
     }
 
     // Wandering should be a coroutine that runs every few seconds
-    private IEnumerator Wander() {
-        yield return new WaitForSeconds(Random.Range(3f, 6f));
-        agent.speed = wanderSpeed;
-        agent.acceleration = 8f;
-        time = 0.0f;
+private IEnumerator Wander() {
+    isWanderingPlayer = false;
+    yield return new WaitForSeconds(Random.Range(3f, 6f));
+    agent.speed = wanderSpeed;
+    agent.acceleration = 8f;
 
-        while (true) {
-            Vector2 randomDirection = Random.insideUnitCircle * (wanderRange - minimumWanderRange);
+    isChasingPlayer = false;
+    isFasterChasingPlayer = false;
 
-            if (randomDirection.magnitude < minimumWanderRange) {
-                randomDirection = randomDirection.normalized * minimumWanderRange;
-            }
-
-            randomDirection += new Vector2(transform.position.x, transform.position.z);
-
-            agent.SetDestination(new Vector3(randomDirection.x, transform.position.y, randomDirection.y));
-
-            yield return new WaitForSeconds(Random.Range(3f, 6f));
+    while (true) {
+        // Calculate a new wander destination
+        Vector2 randomDirection = Random.insideUnitCircle * (wanderRange - minimumWanderRange);
+        if (randomDirection.magnitude < minimumWanderRange) {
+            randomDirection = randomDirection.normalized * minimumWanderRange;
         }
+        randomDirection += new Vector2(transform.position.x, transform.position.z);
+        Vector3 wanderTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.y);
+
+        // Rotate the enemy
+        transform.LookAt(new Vector3(wanderTarget.x, transform.position.y, wanderTarget.z));
+
+        // Set the destination and enable wandering animation flag
+        agent.SetDestination(wanderTarget);
+        isWanderingPlayer = true;
+
+        // Wait until the enemy reaches the destination or a short timeout to prevent being stuck
+        float wanderTimeout = 5f;
+        while (Vector3.Distance(transform.position, wanderTarget) > 1f && wanderTimeout > 0f) {
+            yield return null;
+            wanderTimeout -= Time.deltaTime;
+
+            // Check agent velocity to ensure it’s actively moving
+            if (agent.velocity.sqrMagnitude < 0.1f) {
+                isWanderingPlayer = false;  // Not moving, stop wandering animation
+            } else {
+                isWanderingPlayer = true;  // Moving, play wandering animation
+            }
+        }
+
+        // Stop wandering animation when reaching the destination
+        isWanderingPlayer = false;
+        yield return new WaitForSeconds(Random.Range(3f, 6f));
     }
+}
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
