@@ -106,13 +106,13 @@ public class EnemyController : MonoBehaviour
         
         // Rotate the enemy to face the player in the X and Z axes
         // Make sure the enemy is not looking up or down
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(
+            new Vector3(target.position.x, transform.position.y, target.position.z) - transform.position).normalized, 180f * Time.deltaTime);
 
         time += Time.deltaTime;
 
         if (distanceToTarget <= chaseRange) {
             agent.SetDestination(target.position);
-            transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
         }
 
         if (distanceToTarget <= fasterChaseRange || time >= aggroTime) {
@@ -125,50 +125,58 @@ public class EnemyController : MonoBehaviour
     }
 
     // Wandering should be a coroutine that runs every few seconds
-private IEnumerator Wander() {
-    isWanderingPlayer = false;
-    yield return new WaitForSeconds(Random.Range(3f, 6f));
-    agent.speed = wanderSpeed;
-    agent.acceleration = 8f;
-
-    isChasingPlayer = false;
-    isFasterChasingPlayer = false;
-
-    while (true) {
-        // Calculate a new wander destination
-        Vector2 randomDirection = Random.insideUnitCircle * (wanderRange - minimumWanderRange);
-        if (randomDirection.magnitude < minimumWanderRange) {
-            randomDirection = randomDirection.normalized * minimumWanderRange;
-        }
-        randomDirection += new Vector2(transform.position.x, transform.position.z);
-        Vector3 wanderTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.y);
-
-        // Rotate the enemy
-        transform.LookAt(new Vector3(wanderTarget.x, transform.position.y, wanderTarget.z));
-
-        // Set the destination and enable wandering animation flag
-        agent.SetDestination(wanderTarget);
-        isWanderingPlayer = true;
-
-        // Wait until the enemy reaches the destination or a short timeout to prevent being stuck
-        float wanderTimeout = 5f;
-        while (Vector3.Distance(transform.position, wanderTarget) > 1f && wanderTimeout > 0f) {
-            yield return null;
-            wanderTimeout -= Time.deltaTime;
-
-            // Check agent velocity to ensure it’s actively moving
-            if (agent.velocity.sqrMagnitude < 0.1f) {
-                isWanderingPlayer = false;  // Not moving, stop wandering animation
-            } else {
-                isWanderingPlayer = true;  // Moving, play wandering animation
-            }
-        }
-
-        // Stop wandering animation when reaching the destination
+    private IEnumerator Wander() {
         isWanderingPlayer = false;
         yield return new WaitForSeconds(Random.Range(3f, 6f));
+        agent.speed = wanderSpeed;
+        agent.acceleration = 8f;
+
+        isChasingPlayer = false;
+        isFasterChasingPlayer = false;
+
+        while (true) {
+            // Calculate a new wander destination
+            Vector2 randomDirection = Random.insideUnitCircle * (wanderRange - minimumWanderRange);
+            if (randomDirection.magnitude < minimumWanderRange) {
+                randomDirection = randomDirection.normalized * minimumWanderRange;
+            }
+            randomDirection += new Vector2(transform.position.x, transform.position.z);
+            Vector3 wanderTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.y);
+
+            // Rotate the enemy
+            SmoothRotateTowards(wanderTarget);
+
+            // Set the destination and enable wandering animation flag
+            agent.SetDestination(wanderTarget);
+            isWanderingPlayer = true;
+
+            // Wait until the enemy reaches the destination or a short timeout to prevent being stuck
+            float wanderTimeout = 5f;
+            while (Vector3.Distance(transform.position, wanderTarget) > 1f && wanderTimeout > 0f) {
+                yield return null;
+                wanderTimeout -= Time.deltaTime;
+
+                // Check agent velocity to ensure it’s actively moving
+                if (agent.velocity.sqrMagnitude < 0.1f) {
+                    isWanderingPlayer = false;  // Not moving, stop wandering animation
+                } else {
+                    isWanderingPlayer = true;  // Moving, play wandering animation
+                }
+            }
+
+            // Stop wandering animation when reaching the destination
+            isWanderingPlayer = false;
+            yield return new WaitForSeconds(Random.Range(3f, 6f));
+        }
     }
-}
+    private void SmoothRotateTowards(Vector3 targetPosition) {
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        
+        // Set rotation speed
+        float rotationSpeed = 60f;  // Adjust this value to control the smoothness
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
