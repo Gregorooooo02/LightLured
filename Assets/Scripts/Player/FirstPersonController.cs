@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FirstPersonController : MonoBehaviour
 {
-    public bool CanMove { get; private set; } = true;
+    public bool CanMove { get; set; } = true;
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
     private bool shouldCrouch => canCrouch && Input.GetKeyDown(crouchKey) && !duringCrouchAnuimation;
 

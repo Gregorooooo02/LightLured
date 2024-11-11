@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - LanternLight
+  - Reach
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -18,8 +20,8 @@ TagManager:
   - Player
   - PlayerItem
   - Enemy
-  - 
-  - 
+  - Interact
+  - Note
   - 
   - 
   - 
