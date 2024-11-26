@@ -6,13 +6,23 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour
 {
     public bool CanMove { get; set; } = true;
-    private bool isSprinting => canSprint && Input.GetKey(sprintKey);
+    private bool isSprinting => canSprint && Input.GetKey(sprintKey) && Input.GetAxis("Vertical") > 0 && !isHurt;
     private bool shouldCrouch => canCrouch && Input.GetKeyDown(crouchKey) && !duringCrouchAnuimation;
 
     [Header("Functional Options")]
+    [SerializeField] private bool hasHealth = true;
     [SerializeField] private bool canSprint = true;
     [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool canUseHeadbob = true;
+
+    [Header("Health Parameters")]
+    [SerializeField] private Material screenDamageMaterial;
+    [SerializeField] private float maxHealth = 50.0f;
+    [SerializeField] private float currentHealth = 50.0f;
+    [SerializeField] private float sprintHealthCap = 25.0f;
+    [SerializeField] private float healthRegenRate = 0.5f;
+    private bool isHurt => currentHealth < sprintHealthCap;
+    private bool isDead => currentHealth <= -50;
 
     [Header("Controls")]
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
@@ -82,6 +92,62 @@ public class FirstPersonController : MonoBehaviour
 
             ApplyFinalMovements();
         }
+    }
+
+    private void FixedUpdate() {
+        if (hasHealth) {
+            RegenerateHealth();
+            ScreenDamage();
+        }
+    }
+
+    private void RegenerateHealth() {
+        if (currentHealth < maxHealth) {
+            currentHealth += healthRegenRate * Time.deltaTime;
+        }
+    }
+
+    private void ScreenDamage() {
+        // If the vignette radius is 1, then the screen is clear
+        // If the vignette radius is -1, then the screen is fully red
+        float currentVignetteRadius = 1f;
+        float targetRadius = isDead ? -1f : Mathf.Clamp(currentHealth / maxHealth, -1f, 1f);
+        
+        currentVignetteRadius = targetRadius;
+
+        if (isDead) {
+            currentVignetteRadius = -1f;
+        }
+
+        screenDamageMaterial.SetFloat("_VignetteRadius", currentVignetteRadius);
+    }
+
+    public void TakeDamage(float damage) {
+        currentHealth -= damage;
+
+        // Shake the camera with a random offset
+        StartCoroutine(CameraShake(0.1f, 0.2f));
+    }
+
+    private IEnumerator CameraShake(float duration, float magnitude) {
+        Vector3 originalPos = playerCamera.transform.localPosition;
+        float elapsed = 0.0f;
+
+        while (elapsed < duration) {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            playerCamera.transform.localPosition = new Vector3(
+                originalPos.x + x,
+                originalPos.y + y,
+                originalPos.z
+            );
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        playerCamera.transform.localPosition = originalPos;
     }
 
     private void HandleMovementInput() {

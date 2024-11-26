@@ -640,9 +640,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b984c0e74a01249e99136416848a74d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasHealth: 1
   canSprint: 1
   canCrouch: 1
   canUseHeadbob: 1
+  screenDamageMaterial: {fileID: 2100000, guid: 2379a4c96e2a94aa981179b8d75d62c0,
+    type: 2}
+  maxHealth: 50
+  currentHealth: 50
+  sprintHealthCap: 25
+  healthRegenRate: 5
   sprintKey: 304
   crouchKey: 306
   walkSpeed: 3
@@ -702,6 +709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edfa75827bba4abf87dfa5fce4600e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lanternAnimator: {fileID: 5659818618944999776}
   turnOnOffLantern: 1
   toggleLanternKey: 102
   lanternLight: {fileID: 4308231963759554607}
@@ -1262,6 +1270,12 @@ PrefabInstance:
 --- !u!4 &5578951080992681885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5619423915010730979, guid: 00fb30444464b44d4902ae214e636338,
+    type: 3}
+  m_PrefabInstance: {fileID: 40635974099993726}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5659818618944999776 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5628348586091533598, guid: 00fb30444464b44d4902ae214e636338,
     type: 3}
   m_PrefabInstance: {fileID: 40635974099993726}
   m_PrefabAsset: {fileID: 0}

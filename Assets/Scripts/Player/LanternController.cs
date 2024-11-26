@@ -9,6 +9,8 @@ public class LanternController : MonoBehaviour
 
     private bool lanternOn = true;
 
+    [SerializeField] private Animator lanternAnimator;
+
     [Header("Functional Options")]
     [SerializeField] private bool turnOnOffLantern = true;
 
@@ -51,9 +53,13 @@ public class LanternController : MonoBehaviour
             if (lanternOn) {
                 lightCoroutine = StartCoroutine(GradualLightChange(lanternLight, lanternLightIntensity));
                 additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, additionalLightIntensity));
+
+                lanternAnimator.Play("TurnOn");
             } else {
                 lightCoroutine = StartCoroutine(GradualLightChange(lanternLight, 0f));
                 additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, 0f));
+
+                lanternAnimator.Play("Hide");
             }
         }
     }
