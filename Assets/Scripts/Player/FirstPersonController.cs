@@ -96,7 +96,14 @@ public class FirstPersonController : MonoBehaviour
 
     private void FixedUpdate() {
         if (hasHealth) {
-            RegenerateHealth();
+            if (currentHealth > -50) {
+                RegenerateHealth();    
+            }
+            else {
+                currentHealth = -50;
+                CanMove = false;
+            }
+
             ScreenDamage();
         }
     }

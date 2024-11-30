@@ -19,6 +19,8 @@ public class NoteController : MonoBehaviour
     }
 
     public void OpenNote() {
+        GameManager.instance.CollectNote();
+        
         noteImage.gameObject.SetActive(true);
         // Turn on the depth of field effect
         depthOfField.active = true;

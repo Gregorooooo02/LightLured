@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3661545612801420082}
   - component: {fileID: 1017968301130201203}
   - component: {fileID: 8393115748135489867}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4842,7 +4842,7 @@ GameObject:
   - component: {fileID: 3420849156315161157}
   - component: {fileID: 8731149073807750258}
   - component: {fileID: 6104495469590792336}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5032,6 +5032,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Book
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97876c0638ad74a35bfebcfd8796afdb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97876c0638ad74a35bfebcfd8796afdb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5122,6 +5132,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BookCollectible
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80612b40bc88a42e0bdecc0e843953cc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80612b40bc88a42e0bdecc0e843953cc,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: 80612b40bc88a42e0bdecc0e843953cc,
         type: 3}
       propertyPath: m_Name
@@ -5152,7 +5172,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 80612b40bc88a42e0bdecc0e843953cc,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 6313072854328466769}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 80612b40bc88a42e0bdecc0e843953cc,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 5159946363205829735}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 80612b40bc88a42e0bdecc0e843953cc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 331041516886090135}
   m_SourcePrefab: {fileID: 100100000, guid: 80612b40bc88a42e0bdecc0e843953cc, type: 3}
 --- !u!1 &4884010163289242746 stripped
 GameObject:
@@ -5160,6 +5188,27 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5694261370557399339}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &6313072854328466769
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4884010163289242746}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.37, y: 0.16, z: 0.42}
+  m_Center: {x: 0, y: 0, z: -0.09}
 --- !u!114 &5159946363205829735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5176,6 +5225,22 @@ MonoBehaviour:
   skullLight: {fileID: 8731149073807750258}
   particles: {fileID: 1017968301130201203}
   lanternLight: {fileID: 0}
+--- !u!114 &331041516886090135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4884010163289242746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee44e270d37b46d3ba36d19795378fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  book: {fileID: 2466204976375525675}
+  bookParticles: {fileID: 1894881542483511238}
+  bookLight: {fileID: 2667991355067189202}
+  bookGrabbed: 0
 --- !u!4 &5227744520030971584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 80612b40bc88a42e0bdecc0e843953cc,

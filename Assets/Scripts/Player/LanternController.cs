@@ -7,7 +7,7 @@ public class LanternController : MonoBehaviour
     private GameObject lantern;
     private GameObject[] lanternLights;
 
-    private bool lanternOn = true;
+    private bool lanternOn = false;
 
     [SerializeField] private Animator lanternAnimator;
 
@@ -30,6 +30,10 @@ public class LanternController : MonoBehaviour
     private void Awake() {
         lantern = GameObject.Find("Lantern");
         lanternLights = GameObject.FindGameObjectsWithTag("LanternLight");
+
+        lightCoroutine = StartCoroutine(GradualLightChange(lanternLight, 0f));
+        additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, 0f));
+        lanternAnimator.Play("Hide");
     }
 
     private void Update() {
