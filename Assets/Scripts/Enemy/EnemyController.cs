@@ -19,8 +19,8 @@ public class EnemyController : MonoBehaviour
 
     [Header("Ranges")]
     [SerializeField] private float chaseRange = 1000000f;
-    [SerializeField] private float fasterChaseRange = 100f;
     [SerializeField] private float attackRange = 10f;
+    [SerializeField] private float postAttackPause = 2.0f; // Time to stop after an attack
     [SerializeField] private float wanderRange = 10f;
     [SerializeField] private float minimumWanderRange = 5f;
 
@@ -35,6 +35,7 @@ public class EnemyController : MonoBehaviour
     public bool isWanderingPlayer = false;
     public bool isChasingPlayer = false;
     public bool isFasterChasingPlayer = false;
+    private bool hasAttacked = false;
 
     [SerializeField] private bool isScreamingCoroutine = false;
 
@@ -103,25 +104,66 @@ public class EnemyController : MonoBehaviour
 
     private void ChasePlayer(float distanceToTarget) {
         agent.acceleration = 20f;
-        
+
         // Rotate the enemy to face the player in the X and Z axes
-        // Make sure the enemy is not looking up or down
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(
-            new Vector3(target.position.x, transform.position.y, target.position.z) - transform.position).normalized, 180f * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            Quaternion.LookRotation(
+                new Vector3(target.position.x, transform.position.y, target.position.z) - transform.position
+            ).normalized,
+            180f * Time.deltaTime
+        );
 
-        time += Time.deltaTime;
-
-        if (distanceToTarget <= chaseRange) {
+        // If in chase range and hasn't attacked, pursue the player
+        if (distanceToTarget <= chaseRange && !hasAttacked) {
             agent.SetDestination(target.position);
-        }
 
-        if (distanceToTarget <= fasterChaseRange || time >= aggroTime) {
-            agent.speed = fasterChaseSpeed;
-            isFasterChasingPlayer = true;
-        } else {
-            agent.speed = chaseSpeed;
-            isChasingPlayer = true;
+            // Increase speed after aggro time
+            time += Time.deltaTime;
+            if (time >= aggroTime) {
+                agent.speed = fasterChaseSpeed;
+                isFasterChasingPlayer = true;
+            } else {
+                agent.speed = chaseSpeed;
+                isChasingPlayer = true;
+            }
+
+            // If in attack range and hasn't attacked yet, attack the player
+            if (distanceToTarget <= attackRange) {
+                StartCoroutine(AttackPlayer());
+            }
         }
+    }
+
+    private IEnumerator AttackPlayer() {
+        hasAttacked = true;
+
+        // Stop the monster and face the player
+        agent.isStopped = true;
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+
+        // Perform the attack (e.g., apply damage)
+        target.GetComponent<FirstPersonController>().TakeDamage(75); // Replace with your damage logic
+
+        // Wait for the post-attack pause
+        yield return new WaitForSeconds(postAttackPause);
+
+        // Reset speed to initial chase speed after attack
+        agent.speed = chaseSpeed;
+        isFasterChasingPlayer = false;
+        isChasingPlayer = true;
+
+        // Allow the monster to resume movement
+        agent.isStopped = false;
+
+        // Reset attack state after the player leaves the attack range
+        StartCoroutine(ResetAttackState());
+    }
+
+    private IEnumerator ResetAttackState() {
+        yield return new WaitUntil(() => Vector3.Distance(target.position, transform.position) > attackRange);
+        hasAttacked = false;
+        time = 0f; // Reset chase timer for aggro
     }
 
     // Wandering should be a coroutine that runs every few seconds
@@ -181,9 +223,6 @@ public class EnemyController : MonoBehaviour
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, chaseRange);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, fasterChaseRange);
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, attackRange);

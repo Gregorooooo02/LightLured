@@ -6,7 +6,7 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour
 {
     public bool CanMove { get; set; } = true;
-    private bool isSprinting => canSprint && Input.GetKey(sprintKey) && Input.GetAxis("Vertical") > 0 && !isHurt;
+    private bool isSprinting => canSprint && Input.GetKey(sprintKey) && Input.GetAxis("Vertical") > 0 && !isHurtLegs;
     private bool shouldCrouch => canCrouch && Input.GetKeyDown(crouchKey) && !duringCrouchAnuimation;
 
     [Header("Functional Options")]
@@ -19,9 +19,10 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private Material screenDamageMaterial;
     [SerializeField] private float maxHealth = 50.0f;
     [SerializeField] private float currentHealth = 50.0f;
-    [SerializeField] private float sprintHealthCap = 25.0f;
     [SerializeField] private float healthRegenRate = 0.5f;
-    private bool isHurt => currentHealth < sprintHealthCap;
+    public bool isHurtLegs = false;
+    private float nerfedLegsTimer = 0.0f;
+    [SerializeField] private float nerfedLegsDuration = 5.0f;
     private bool isDead => currentHealth <= -50;
 
     [Header("Controls")]
@@ -105,6 +106,18 @@ public class FirstPersonController : MonoBehaviour
             }
 
             ScreenDamage();
+        }
+
+        if (isDead) {
+            // Play death animation
+        }
+
+        if (isHurtLegs) {
+            nerfedLegsTimer += Time.deltaTime;
+            if (nerfedLegsTimer >= nerfedLegsDuration) {
+                isHurtLegs = false;
+                nerfedLegsTimer = 0.0f;
+            }
         }
     }
 

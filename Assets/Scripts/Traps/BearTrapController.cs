@@ -7,7 +7,7 @@ public class BearTrapController : MonoBehaviour
     [SerializeField] private FirstPersonController playerController;
 
     private Animator animator;
-    private bool isTriggered = false;
+    public static bool isTriggered = false;
 
     private void Awake() {
         animator = GetComponent<Animator>();
@@ -20,6 +20,7 @@ public class BearTrapController : MonoBehaviour
 
             // Damage the player
             playerController.TakeDamage(50);
+            playerController.isHurtLegs = true;
         }
     }
 
