@@ -89,6 +89,13 @@ public class EnemyController : MonoBehaviour
             timeToTarget = 0.0f;
             time = 0.0f;
         }
+
+        if (!isLanternOn) {
+            // If the player is too close to the enemy, attack the player
+            if (distanceToTarget <= attackRange) {
+                StartCoroutine(AttackPlayer());
+            }
+        }
     }
 
     private IEnumerator ScreamAndTarget() {

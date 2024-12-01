@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DamageMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: da95fcfa7df36484882bf96c835a22af,
+  m_Name: FadeScreen
+  m_Shader: {fileID: -6465566751694194690, guid: ea72178a6d515490b9111872337371ee,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,17 +38,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Fullscreen_AlphaBlendOperation: 0
-    - _Fullscreen_BlendMode: 1
-    - _Fullscreen_ColorBlendOperation: 0
-    - _Fullscreen_DepthWrite: 0
-    - _Fullscreen_DstAlphaBlend: 10
-    - _Fullscreen_DstColorBlend: 10
-    - _Fullscreen_SrcAlphaBlend: 1
-    - _Fullscreen_SrcColorBlend: 5
-    - _VignetteDarkening: 1
-    - _VignetteRadius: 1
-    - _VignetteSmoothness: 1
-    m_Colors:
-    - _Tint: {r: 0.5, g: 0, b: 0, a: 0}
+    - _FadeTime: 0
+    m_Colors: []
   m_BuildTextureStacks: []

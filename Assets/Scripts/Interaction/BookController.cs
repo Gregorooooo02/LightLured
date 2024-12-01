@@ -7,6 +7,8 @@ public class BookController : MonoBehaviour
 {
     public bool bookGrabbed = false;
 
+    [SerializeField] private GameObject enemyToActivate;
+
     public void GrabBook() {
         StartCoroutine(GameManager.instance.CollectBookCoroutine());
         bookGrabbed = !bookGrabbed;
@@ -14,6 +16,10 @@ public class BookController : MonoBehaviour
         if (bookGrabbed) {
             foreach (Transform child in transform) {
                 child.gameObject.SetActive(false);
+
+                if (enemyToActivate != null) {
+                    enemyToActivate.SetActive(true);
+                }
             }
         }
     }
