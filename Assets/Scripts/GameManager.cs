@@ -10,6 +10,15 @@ public class GameManager : MonoBehaviour
     public bool hasLantern = false;
     public bool hasNote = false;
 
+    [Header("Global Variables")]
+    [SerializeField] private Light nightLight;
+    [SerializeField] private float lightIntensityStart = 0.35f;
+    [SerializeField] private float lightIntensityEnd = 0.05f;
+
+    public bool isPaused = false;
+    public bool isGameOver = false;
+
+
     [Header("Books")]
     public int booksCollected = 0;
     public int totalBooks = 5;
@@ -28,6 +37,7 @@ public class GameManager : MonoBehaviour
             instance = this;
 
             numberOfBooksText.SetActive(false);
+            nightLight.intensity = lightIntensityStart;
         }
         else {
             Destroy(gameObject);
@@ -42,10 +52,20 @@ public class GameManager : MonoBehaviour
 
     public void CollectLantern() {
         hasLantern = true;
+        LampScare.instance.StartCoroutine(LampScare.instance.BreakLight());
     }
 
     public void CollectNote() {
         hasNote = true;
+    }
+
+    public IEnumerator ChangeLightIntensity() {
+        float t = 0;
+        while (t < 1) {
+            t += Time.deltaTime / 2;
+            nightLight.intensity = Mathf.Lerp(lightIntensityStart, lightIntensityEnd, t);
+            yield return null;
+        }
     }
 
     public IEnumerator CollectBookCoroutine() {

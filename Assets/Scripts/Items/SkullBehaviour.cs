@@ -11,10 +11,21 @@ public class SkullBehaviour : MonoBehaviour
 
     [Header("Target")]
     [SerializeField] private Light lanternLight;
+    [SerializeField] private GameObject player;
+    [SerializeField] private float distanceToPlayer;
+    [SerializeField] private float particlesCap = 10f;
     private bool isLanternOn;
 
     private void Update() {
         CheckLantern();
+    }
+
+    private void LateUpdate() {
+        distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+
+        if (distanceToPlayer <= particlesCap) {
+            particles.Stop();
+        }
     }
 
     private void CheckLantern() {

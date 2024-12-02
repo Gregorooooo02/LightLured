@@ -5225,6 +5225,9 @@ MonoBehaviour:
   skullLight: {fileID: 8731149073807750258}
   particles: {fileID: 1017968301130201203}
   lanternLight: {fileID: 0}
+  player: {fileID: 0}
+  distanceToPlayer: 0
+  particlesCap: 40
 --- !u!114 &331041516886090135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5237,10 +5240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee44e270d37b46d3ba36d19795378fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  book: {fileID: 2466204976375525675}
-  bookParticles: {fileID: 1894881542483511238}
-  bookLight: {fileID: 2667991355067189202}
   bookGrabbed: 0
+  enemyToActivate: {fileID: 0}
 --- !u!4 &5227744520030971584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 80612b40bc88a42e0bdecc0e843953cc,

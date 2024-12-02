@@ -9,6 +9,7 @@ public class LanternRaycastController : MonoBehaviour
     public void GrabLantern() {
         GameManager.instance.CollectLantern();
         StartCoroutine(GameManager.instance.DisplayText(GameManager.instance.obtainedLanternText));
+        StartCoroutine(GameManager.instance.ChangeLightIntensity());
 
         lanternGrabbed = !lanternGrabbed;
 

@@ -1,44 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStateController : MonoBehaviour
 {
     private Animator animator;
     private EnemyController enemyController;
+    private NavMeshAgent agent;
 
-    private void Start() {
+    [Header("Speed thresholds")]
+    [SerializeField] private float wanderThreshold = 1f;
+    [SerializeField] private float runThreshold = 3f;
+    [SerializeField] private float sprintThreshold = 6f;
+
+    private void Awake() {
         animator = GetComponent<Animator>();
         enemyController = GetComponent<EnemyController>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update() {
-        if (enemyController.isWanderingPlayer) {
-            animator.SetBool("isWandering", true);
-        }
-        else {
-            animator.SetBool("isWandering", false);
-        }
+        float currentSpeed = agent.velocity.magnitude;
 
-        if (enemyController.isTargetingPlayer) {
-            animator.SetBool("isTargeting", true);
-        }
-        else {
-            animator.SetBool("isTargeting", false);
-        }
+        animator.SetBool("isWandering", currentSpeed > 0 && currentSpeed < wanderThreshold);
+        animator.SetBool("isRunning", currentSpeed > wanderThreshold && currentSpeed < runThreshold);
+        animator.SetBool("isSprinting", currentSpeed > runThreshold && currentSpeed < sprintThreshold);
 
-        if (enemyController.isChasingPlayer) {
-            animator.SetBool("isRunning", true);
-        }
-        else {
-            animator.SetBool("isRunning", false);
-        }
-
-        if (enemyController.isFasterChasingPlayer) {
-            animator.SetBool("isSprinting", true);
-        }
-        else {
-            animator.SetBool("isSprinting", false);
-        }
+        animator.SetBool("isTargeting", enemyController.isTargetingPlayer);
     }
 }

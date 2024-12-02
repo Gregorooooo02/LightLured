@@ -32,9 +32,6 @@ public class EnemyController : MonoBehaviour
     [Header("Booleans")]
     private bool isWandering = false;
     public bool isTargetingPlayer = false;
-    public bool isWanderingPlayer = false;
-    public bool isChasingPlayer = false;
-    public bool isFasterChasingPlayer = false;
     private bool hasAttacked = false;
 
     [SerializeField] private bool isScreamingCoroutine = false;
@@ -63,7 +60,6 @@ public class EnemyController : MonoBehaviour
                 // Agent should stop moving when it's targeting the player
                 StopCoroutine(Wander());
                 agent.SetDestination(transform.position);
-                isWanderingPlayer = false;
             }
             if (timeToTarget >= timeToAggro && !isScreamingCoroutine) {
                 StartCoroutine(ScreamAndTarget());
@@ -76,14 +72,10 @@ public class EnemyController : MonoBehaviour
         }
         else if (isWandering && !isLanternOn) {
             StartCoroutine(Wander());
-            isWanderingPlayer = false;
             // This is to prevent the coroutine from running multiple times
             isWandering = false;
 
             isTargetingPlayer = false;
-            isChasingPlayer = false;
-            isFasterChasingPlayer = false;
-
             isScreamingCoroutine = false;
 
             timeToTarget = 0.0f;
@@ -129,10 +121,8 @@ public class EnemyController : MonoBehaviour
             time += Time.deltaTime;
             if (time >= aggroTime) {
                 agent.speed = fasterChaseSpeed;
-                isFasterChasingPlayer = true;
             } else {
                 agent.speed = chaseSpeed;
-                isChasingPlayer = true;
             }
 
             // If in attack range and hasn't attacked yet, attack the player
@@ -157,8 +147,6 @@ public class EnemyController : MonoBehaviour
 
         // Reset speed to initial chase speed after attack
         agent.speed = chaseSpeed;
-        isFasterChasingPlayer = false;
-        isChasingPlayer = true;
 
         // Allow the monster to resume movement
         agent.isStopped = false;
@@ -175,13 +163,9 @@ public class EnemyController : MonoBehaviour
 
     // Wandering should be a coroutine that runs every few seconds
     private IEnumerator Wander() {
-        isWanderingPlayer = false;
         yield return new WaitForSeconds(Random.Range(3f, 6f));
         agent.speed = wanderSpeed;
         agent.acceleration = 8f;
-
-        isChasingPlayer = false;
-        isFasterChasingPlayer = false;
 
         while (true) {
             // Calculate a new wander destination
@@ -197,24 +181,13 @@ public class EnemyController : MonoBehaviour
 
             // Set the destination and enable wandering animation flag
             agent.SetDestination(wanderTarget);
-            isWanderingPlayer = true;
 
             // Wait until the enemy reaches the destination or a short timeout to prevent being stuck
             float wanderTimeout = 5f;
             while (Vector3.Distance(transform.position, wanderTarget) > 1f && wanderTimeout > 0f) {
                 yield return null;
                 wanderTimeout -= Time.deltaTime;
-
-                // Check agent velocity to ensure it’s actively moving
-                if (agent.velocity.sqrMagnitude < 0.1f) {
-                    isWanderingPlayer = false;  // Not moving, stop wandering animation
-                } else {
-                    isWanderingPlayer = true;  // Moving, play wandering animation
-                }
             }
-
-            // Stop wandering animation when reaching the destination
-            isWanderingPlayer = false;
             yield return new WaitForSeconds(Random.Range(3f, 6f));
         }
     }
