@@ -273,7 +273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &476748688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I love you!
+  m_text: Something is trying to hurt us, th-those monsters... Hurry!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -745,7 +745,7 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
+            m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -858,7 +858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &986215272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,12 +1258,12 @@ Transform:
   m_GameObject: {fileID: 1209571703}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20433153, y: 0.23273143, z: -0.03660883, w: 0.9501287}
-  m_LocalPosition: {x: 0.127, y: 2.441, z: 4.433}
+  m_LocalPosition: {x: 0.19, y: 1.992, z: 5.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 23.911, y: 27.866, z: 1.601}
+  m_LocalEulerAnglesHint: {x: 0.0000002636051, y: 0.000000008074721, z: -0.000000107058}
 --- !u!95 &1209571708
 Animator:
   serializedVersion: 5
@@ -1277,7 +1277,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d55d0da99fe754ac1935ac225cf79fa5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1648,8 +1648,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hi honey! I'm sorry I disappeared so suddenly. My grandma got really sick
-    and I had to drive to her as soon as possible.
+  m_text: Please... you have to help me. Something is going on, and I don't know
+    what.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1964,7 +1964,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I promise you, I'll be back in a few days.
+  m_text: 'You have to get us out of here, please! '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2354,62 +2354,41 @@ PlayableDirector:
   m_GameObject: {fileID: 2057166477}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 4296a4ef3939e41cc9ee2cae649511ad, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: d2d8966bae79146058d9a7563656016b, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: -7974152046331751162, guid: d2d8966bae79146058d9a7563656016b, type: 2}
-    value: {fileID: 1209571708}
   - key: {fileID: -1725658813344483820, guid: d2d8966bae79146058d9a7563656016b, type: 2}
     value: {fileID: 769267098}
   - key: {fileID: -2406390756511366747, guid: d2d8966bae79146058d9a7563656016b, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: 9154947853885724343, guid: 4296a4ef3939e41cc9ee2cae649511ad, type: 2}
     value: {fileID: 1209571708}
-  - key: {fileID: -8386750505290855908, guid: 4296a4ef3939e41cc9ee2cae649511ad, type: 2}
-    value: {fileID: 769267098}
   m_ExposedReferences:
     m_References:
-    - 3e3f6b9ff652a4f1cb1822b90856d34b: {fileID: 716084445}
-    - 1419198ee728049b2ac5be48b6ed7f03: {fileID: 716084445}
     - d58bbf98d2b024bd088fb9762e8dbe63: {fileID: 716084445}
     - d7fd3bf53fff74f24832c21f5c698450: {fileID: 716084445}
     - b966e6b25d829434d90fbecb02e5e7b9: {fileID: 716084445}
+    - 427295c6fccde46e3b75dc325e119d27: {fileID: 476748687}
     - fa1b83ac4c33e4cc1b2519779e36cd16: {fileID: 716084445}
+    - dd1330a64d83245e3abf439083290757: {fileID: 1849085395}
     - ad401b4c8555f4c78ae1aba36cabdc3b: {fileID: 986215271}
-    - 2052fa01aa14b4a5195b5cd31b06d9e2: {fileID: 1689234579}
-    - b6bf120e51c764662805c213646048bf: {fileID: 986215271}
     - d63c71db8e5a44222ad92db76ae497af: {fileID: 716084445}
     - ae08d55569a824b23a4b2699c3b724b5: {fileID: 716084445}
-    - a2e67ccf9cc5b4111966cfbf40d71f4a: {fileID: 716084445}
-    - 45405f379168646ffa8e4296e53a53c7: {fileID: 716084445}
     - 878761956dcb64852aa0fc9c12a2c6a6: {fileID: 716084445}
-    - 2fffc58cd626b46709991f04f2669c60: {fileID: 476748687}
     - 8456460980a484479bfda660401fa37d: {fileID: 716084445}
-    - 0a0c4c25a447f43859e261ffc07bdbef: {fileID: 716084445}
     - 1a2860aa66b0549bcac4b6bc36cda9a6: {fileID: 716084445}
-    - 9b93dd41291e04fd49113ae442a7826d: {fileID: 716084445}
+    - 8b47e52ee04594901a6f0a086ede9fc5: {fileID: 1689234579}
     - 4a1a7dbc8531042f0b269bd88295ed81: {fileID: 1209571703}
-    - c403513bbf02546408f914fc59959760: {fileID: 1209571703}
-    - 71f02cdfc9401478585aabebd13149bf: {fileID: 716084445}
-    - 6508083e283204b4382add5f834e1461: {fileID: 1849085395}
-    - 2fefedfc99b9f48a398e275a68d03277: {fileID: 716084445}
     - d6cd2d0c0b7a34f0aafb2b473bcb0cde: {fileID: 716084445}
     - ff47ee7a6e0394d53a98efbf19ab6222: {fileID: 1849085395}
     - 346aa9a7046b04375a92809821c0f323: {fileID: 716084445}
-    - 0b94232da93ff437e9f84d370d9860e2: {fileID: 716084445}
     - bf6bf674583a24f10bf36169f04a939f: {fileID: 716084445}
     - dcd8a69e9c923406baccaaa0d905723b: {fileID: 769267097}
     - 54de0085818144599a87816fd17b78fd: {fileID: 716084445}
     - a0568c95698b8493c84e70228c7eb32b: {fileID: 1689234579}
     - 56cbc9e5b3cab4539bd9d53a4990b829: {fileID: 476748687}
-    - db3c75dd32383424fbd1a27a2b2ebfb8: {fileID: 716084445}
-    - 925e4645415ec41c9ad08901746d1d1d: {fileID: 716084445}
-    - bf0c6eb877e9d4fc68e29deb988b39bf: {fileID: 716084445}
     - ac5fe32b357e9499a9b1cb3a654d3a16: {fileID: 716084445}
-    - d8f885e6cff2048f2b80ef9d98c66378: {fileID: 716084445}
 --- !u!4 &2057166479
 Transform:
   m_ObjectHideFlags: 0
