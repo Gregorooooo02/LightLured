@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BookRaycast : MonoBehaviour
+public class LanternRaycast : MonoBehaviour
 {
     [SerializeField] private int rayLength = 5;
     [SerializeField] private LayerMask layerMaskInteract;
     [SerializeField] private string excludeLayerName = null;
 
-    private BookController raycastedObject;
+    private LanternRaycastController raycastedObject;
 
     [SerializeField] private KeyCode interactKey = KeyCode.E;
 
@@ -18,42 +18,41 @@ public class BookRaycast : MonoBehaviour
 
     private const string interactableTag = "Interactable";
 
-    private void Update() {
+    void Update()
+    {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
         int mask = 1 << LayerMask.NameToLayer(excludeLayerName) | layerMaskInteract.value;
 
-        if (GameManager.instance.hasLantern) {
-            if (Physics.Raycast(transform.position, fwd, out hit, rayLength, mask)) {
-                if (hit.collider.CompareTag(interactableTag)) {
-                    if (!doOnce) {
-                        raycastedObject = hit.collider.gameObject.GetComponent<BookController>();
-                        ActivateText(true);
-                    }
+        if (Physics.Raycast(transform.position, fwd, out hit, rayLength, mask)) {
+            if (hit.collider.CompareTag(interactableTag)) {
+                if (!doOnce) {
+                    raycastedObject = hit.collider.gameObject.GetComponent<LanternRaycastController>();
+                    ActivateText(true);
+                }
 
-                    isTextActive = true;
-                    doOnce = true;
+                isTextActive = true;
+                doOnce = true;
 
-                    if (Input.GetKeyDown(interactKey) && !raycastedObject.bookGrabbed) {
-                        raycastedObject.GrabBook();
-                    }
+                if (Input.GetKeyDown(interactKey) && !raycastedObject.lanternGrabbed && GameManager.instance.hasNote) {
+                    raycastedObject.GrabLantern();
                 }
             }
-            else {
-                if (isTextActive) {
-                    ActivateText(false);
-                    doOnce = false;
-                }
+        }
+        else {
+            if (isTextActive) {
+                ActivateText(false);
+                doOnce = false;
             }
         }
     }
 
     private void ActivateText(bool activate) {
-        if (activate && !doOnce && !raycastedObject.bookGrabbed) {
+        if (activate && !doOnce && !raycastedObject.lanternGrabbed && GameManager.instance.hasNote) {
             grabText.SetActive(true);
         }
-        else if (!raycastedObject.bookGrabbed) {
+        else if (!raycastedObject.lanternGrabbed) {
             grabText.SetActive(false);
             isTextActive = false;
         }

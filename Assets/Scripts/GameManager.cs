@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,6 +15,13 @@ public class GameManager : MonoBehaviour
     public int totalBooks = 5;
     [SerializeField] private GameObject numberOfBooksText;
     [SerializeField] private GameObject[] books;
+    public bool isFirstBook = true;
+
+    [Header("UI")]
+    [SerializeField] public GameObject obtainedLanternText;
+    [SerializeField] public GameObject monsterText;
+    public float textDuration = 3f;
+    public float transparencySpeed = 0.1f;
 
     private void Awake() {
         if (instance == null) {
@@ -27,7 +35,9 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update() {
-        
+        if (booksCollected >= 1) {
+            isFirstBook = false;
+        }
     }
 
     public void CollectLantern() {
@@ -43,13 +53,19 @@ public class GameManager : MonoBehaviour
         numberOfBooksText.SetActive(true);
 
         if (booksCollected >= totalBooks) {
-            numberOfBooksText.GetComponent<TMPro.TextMeshProUGUI>().text = "Sacrifice them!";
+            numberOfBooksText.GetComponent<TMPro.TextMeshProUGUI>().text = "Burn them all!";
         }
         else {
             numberOfBooksText.GetComponent<TMPro.TextMeshProUGUI>().text = booksCollected + " / " + totalBooks;    
         }
         yield return new WaitForSeconds(3f);
         numberOfBooksText.SetActive(false);
+    }
+
+    public IEnumerator DisplayText(GameObject text) {
+        text.GetComponent<Animator>().Play("FadeOut");
+        yield return new WaitForSeconds(textDuration);
+        text.GetComponent<Animator>().Play("FadeIn");
     }
 
     public void ResetBooks() {

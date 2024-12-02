@@ -24,6 +24,10 @@ public class LanternController : MonoBehaviour
     [SerializeField] private float lanternLightIntensity = 30f;
     [SerializeField] private float additionalLightIntensity = 1f;
 
+    [Header("Cooldown Settings")]
+    [SerializeField] private float cooldownTime = 1f;
+    private bool canToggleLantern = true;
+
     private Coroutine lightCoroutine;
     private Coroutine additionalLightCoroutine;
 
@@ -37,35 +41,43 @@ public class LanternController : MonoBehaviour
     }
 
     private void Update() {
-        if (turnOnOffLantern) {
+        if (turnOnOffLantern && GameManager.instance.hasLantern) {
             HandleLanternLight();
         }
     }
 
     private void HandleLanternLight() {
-        if (Input.GetKeyDown(toggleLanternKey)) {
-            lanternOn = !lanternOn;
-
-            if (lightCoroutine != null) {
-                StopCoroutine(lightCoroutine);
-            }
-
-            if (additionalLightCoroutine != null) {
-                StopCoroutine(additionalLightCoroutine);
-            }
-
-            if (lanternOn) {
-                lightCoroutine = StartCoroutine(GradualLightChange(lanternLight, lanternLightIntensity));
-                additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, additionalLightIntensity));
-
-                lanternAnimator.Play("TurnOn");
-            } else {
-                lightCoroutine = StartCoroutine(GradualLightChange(lanternLight, 0f));
-                additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, 0f));
-
-                lanternAnimator.Play("Hide");
-            }
+        if (Input.GetKeyDown(toggleLanternKey) && canToggleLantern) {
+            StartCoroutine(ToggleLight());
         }
+    }
+
+    private IEnumerator ToggleLight() {
+        canToggleLantern = false;
+        lanternOn = !lanternOn;
+
+        if (lightCoroutine != null) {
+            StopCoroutine(lightCoroutine);
+        }
+
+        if (additionalLightCoroutine != null) {
+            StopCoroutine(additionalLightCoroutine);
+        }
+
+        if (lanternOn) {
+            lightCoroutine = StartCoroutine(GradualLightChange(lanternLight, lanternLightIntensity));
+            additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, additionalLightIntensity));
+
+            lanternAnimator.Play("TurnOn");
+        } else {
+            lightCoroutine = StartCoroutine(GradualLightChange(lanternLight, 0f));
+            additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, 0f));
+
+            lanternAnimator.Play("Hide");
+        }
+
+        yield return new WaitForSeconds(cooldownTime);
+        canToggleLantern = true;
     }
 
     private IEnumerator GradualLightChange(Light light, float targetIntensity) {

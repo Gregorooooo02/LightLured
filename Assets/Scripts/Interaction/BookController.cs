@@ -11,9 +11,15 @@ public class BookController : MonoBehaviour
 
     public void GrabBook() {
         StartCoroutine(GameManager.instance.CollectBookCoroutine());
+
+        if (GameManager.instance.isFirstBook) {
+            StartCoroutine(GameManager.instance.DisplayText(GameManager.instance.monsterText));
+        }
+
         bookGrabbed = !bookGrabbed;
 
         if (bookGrabbed) {
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             foreach (Transform child in transform) {
                 child.gameObject.SetActive(false);
 
@@ -23,6 +29,4 @@ public class BookController : MonoBehaviour
             }
         }
     }
-
-
 }
