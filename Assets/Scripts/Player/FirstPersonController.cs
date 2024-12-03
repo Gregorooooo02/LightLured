@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FirstPersonController : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class FirstPersonController : MonoBehaviour
     public bool isHurtLegs = false;
     private float nerfedLegsTimer = 0.0f;
     [SerializeField] private float nerfedLegsDuration = 5.0f;
-    private bool isDead => currentHealth <= -50;
+    private bool isDead = false;
 
     [Header("Controls")]
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
@@ -68,9 +69,14 @@ public class FirstPersonController : MonoBehaviour
 
     private float rotationX = 0;
 
+    private bool isReloading = false;
+
     private void Awake() {
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
+
+        currentHealth = maxHealth;
+        isDead = false;
 
         defaultYPos = playerCamera.transform.localPosition.y;
 
@@ -102,14 +108,15 @@ public class FirstPersonController : MonoBehaviour
             }
             else {
                 currentHealth = -50;
-                CanMove = false;
+                isDead = true;
             }
-
             ScreenDamage();
         }
 
-        if (isDead) {
-            // Play death animation
+        if (isDead && !isReloading) {
+            isReloading = true;
+            CanMove = false;
+            LevelManager.instance.FadeIntoScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         if (isHurtLegs) {

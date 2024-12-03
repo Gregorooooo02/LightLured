@@ -120,15 +120,14 @@ public class EnemyController : MonoBehaviour
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
 
         yield return new WaitForSeconds(1f);
-
         isScreamingCoroutine = true;
-
         yield return new WaitForSeconds(1f);
     }
 
     private void ChasePlayer(float distanceToTarget) {
         agent.acceleration = 20f;
 
+        time += Time.deltaTime;
         // Rotate the enemy to face the player in the X and Z axes
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
@@ -144,15 +143,8 @@ public class EnemyController : MonoBehaviour
             Vector3 extendedTarget = target.position + directionToPlayer * overshootDistance;
 
             agent.SetDestination(extendedTarget);
-
-            // Increase speed after aggro time
-            time += Time.deltaTime;
-            if (time >= aggroTime) {
-                agent.speed = fasterChaseSpeed;
-            } else {
-                agent.speed = chaseSpeed;
-            }
-
+            agent.speed = (time >= aggroTime) ? fasterChaseSpeed : chaseSpeed;
+            
             // If in attack range and hasn't attacked yet, attack the player
             if (distanceToTarget <= attackRange) {
                 StartCoroutine(AttackPlayer());
@@ -162,23 +154,21 @@ public class EnemyController : MonoBehaviour
 
     private IEnumerator AttackPlayer() {
         hasAttacked = true;
-
         // Stop the monster and face the player
         agent.isStopped = true;
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
-
         // Perform the attack (e.g., apply damage)
         target.GetComponent<FirstPersonController>().TakeDamage(75); // Replace with your damage logic
-
         // Wait for the post-attack pause
         yield return new WaitForSeconds(postAttackPause);
-
         // Reset speed to initial chase speed after attack
         agent.speed = chaseSpeed;
-
         // Allow the monster to resume movement
         agent.isStopped = false;
-
+        // Ensure the agent resumes chasing after the attack
+        if (Vector3.Distance(target.position, transform.position) <= chaseRange) {
+            agent.SetDestination(target.position); // Explicitly set the destination again to resume chasing
+        }
         // Reset attack state after the player leaves the attack range
         StartCoroutine(ResetAttackState());
     }
@@ -186,6 +176,7 @@ public class EnemyController : MonoBehaviour
     private IEnumerator ResetAttackState() {
         yield return new WaitUntil(() => Vector3.Distance(target.position, transform.position) > attackRange);
         hasAttacked = false;
+
         time = 0f; // Reset chase timer for aggro
     }
 
