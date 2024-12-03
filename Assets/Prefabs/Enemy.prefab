@@ -2295,12 +2295,11 @@ MonoBehaviour:
   wanderRange: 20
   minimumWanderRange: 8
   chaseSpeed: 6.5
-  fasterChaseSpeed: 15
+  fasterChaseSpeed: 13
   wanderSpeed: 3
   isTargetingPlayer: 0
-  isWanderingPlayer: 0
-  isChasingPlayer: 0
-  isFasterChasingPlayer: 0
+  teleportRadius: 20
+  playerTooFarDistance: 60
   isScreamingCoroutine: 0
 --- !u!114 &8621069723511107884
 MonoBehaviour:

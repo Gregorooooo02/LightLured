@@ -34,7 +34,14 @@ public class EnemyController : MonoBehaviour
     public bool isTargetingPlayer = false;
     private bool hasAttacked = false;
 
-    [SerializeField] private bool isScreamingCoroutine = false;
+    [Header("Teleport Settings")]
+    [SerializeField] private float teleportRadius = 60f;
+    [SerializeField] private float playerTooFarDistance = 100f;
+
+    [Header("Chase Settings")]
+    [SerializeField] private float overshootDistance = 5f;
+
+    private bool isScreamingCoroutine = false;
 
     private void Awake() {
         agent = GetComponent<NavMeshAgent>();
@@ -50,6 +57,10 @@ public class EnemyController : MonoBehaviour
     private void Update() {
         float distanceToTarget = Vector3.Distance(target.position, transform.position);
         bool isLanternOn = lanternLight.intensity > 0;
+
+        if (distanceToTarget > playerTooFarDistance) {
+            TeleportToRandomPoint();
+        }
 
         if (isLanternOn) {
             timeToTarget += Time.deltaTime;
@@ -71,10 +82,10 @@ public class EnemyController : MonoBehaviour
             }
         }
         else if (isWandering && !isLanternOn) {
+            StopAllCoroutines();
             StartCoroutine(Wander());
             // This is to prevent the coroutine from running multiple times
             isWandering = false;
-
             isTargetingPlayer = false;
             isScreamingCoroutine = false;
 
@@ -83,11 +94,25 @@ public class EnemyController : MonoBehaviour
         }
 
         if (!isLanternOn) {
+            timeToTarget = 0.0f;
+            time = 0.0f;
             // If the player is too close to the enemy, attack the player
             if (distanceToTarget <= attackRange) {
                 StartCoroutine(AttackPlayer());
             }
         }
+    }
+
+    private void TeleportToRandomPoint() {
+        Vector2 randomPoint = Random.insideUnitCircle.normalized * teleportRadius;
+        Vector3 teleportPosition = new Vector3(
+            target.position.x + randomPoint.x,
+            transform.position.y,
+            target.position.z + randomPoint.y
+        );
+
+        transform.position = teleportPosition;
+        agent.Warp(teleportPosition);
     }
 
     private IEnumerator ScreamAndTarget() {
@@ -115,7 +140,10 @@ public class EnemyController : MonoBehaviour
 
         // If in chase range and hasn't attacked, pursue the player
         if (distanceToTarget <= chaseRange && !hasAttacked) {
-            agent.SetDestination(target.position);
+            Vector3 directionToPlayer = (target.position - transform.position).normalized;
+            Vector3 extendedTarget = target.position + directionToPlayer * overshootDistance;
+
+            agent.SetDestination(extendedTarget);
 
             // Increase speed after aggro time
             time += Time.deltaTime;
