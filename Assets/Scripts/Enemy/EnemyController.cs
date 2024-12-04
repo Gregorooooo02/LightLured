@@ -42,6 +42,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float overshootDistance = 5f;
 
     private bool isScreamingCoroutine = false;
+    private bool isAttacking = false;
 
     private void Awake() {
         agent = GetComponent<NavMeshAgent>();
@@ -74,32 +75,42 @@ public class EnemyController : MonoBehaviour
             }
             if (timeToTarget >= timeToAggro && !isScreamingCoroutine) {
                 StartCoroutine(ScreamAndTarget());
-                isWandering = true;
+                isWandering = false;
             }
 
             if (isScreamingCoroutine) {
                 ChasePlayer(distanceToTarget);
             }
         }
-        else if (isWandering && !isLanternOn) {
-            StopAllCoroutines();
-            StartCoroutine(Wander());
-            // This is to prevent the coroutine from running multiple times
-            isWandering = false;
-            isTargetingPlayer = false;
-            isScreamingCoroutine = false;
+        else {
+            if (isScreamingCoroutine) {
+                StopCoroutine(ScreamAndTarget());
+                isScreamingCoroutine = false;
+            }
 
-            timeToTarget = 0.0f;
-            time = 0.0f;
-        }
+            if (isAttacking) {
+                StopCoroutine(AttackPlayer());
+                StartCoroutine(ResetAttackState());
+            }
 
-        if (!isLanternOn) {
-            timeToTarget = 0.0f;
-            time = 0.0f;
+            if (!isWandering) {
+                StartCoroutine(Wander());
+                isWandering = true;
+                isTargetingPlayer = false;
+            }
+
             // If the player is too close to the enemy, attack the player
-            if (distanceToTarget <= attackRange) {
+            if (!isAttacking && distanceToTarget <= attackRange) {
                 StartCoroutine(AttackPlayer());
             }
+
+            // Check if the agent is at the position of the target - if so, reset the isTargetinPlayer
+            if (Vector3.Distance(transform.position, target.position) < 1f) {
+                isTargetingPlayer = false;
+            }
+            
+            timeToTarget = 0.0f;
+            time = 0.0f;
         }
     }
 
@@ -153,7 +164,9 @@ public class EnemyController : MonoBehaviour
     }
 
     private IEnumerator AttackPlayer() {
+        isAttacking = true;
         hasAttacked = true;
+
         // Stop the monster and face the player
         agent.isStopped = true;
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
@@ -169,15 +182,20 @@ public class EnemyController : MonoBehaviour
         if (Vector3.Distance(target.position, transform.position) <= chaseRange) {
             agent.SetDestination(target.position); // Explicitly set the destination again to resume chasing
         }
+        isAttacking = false;
+
         // Reset attack state after the player leaves the attack range
         StartCoroutine(ResetAttackState());
     }
 
     private IEnumerator ResetAttackState() {
         yield return new WaitUntil(() => Vector3.Distance(target.position, transform.position) > attackRange);
+
         hasAttacked = false;
+        isAttacking = false;
 
         time = 0f; // Reset chase timer for aggro
+        agent.isStopped = false;
     }
 
     // Wandering should be a coroutine that runs every few seconds

@@ -7,8 +7,12 @@ using UnityEngine.UI;
 
 public class NoteController : MonoBehaviour
 {
-    [SerializeField] private RawImage noteImage;
+    [Header("Game Objects")]
+    [SerializeField] private GameObject noteWithoutOutline;
+    [SerializeField] private GameObject lanternOutline;
 
+    [Header("UI")] 
+    [SerializeField] private RawImage noteImage;
     [SerializeField] private Volume volume;
     private DepthOfField depthOfField = null;
 
@@ -38,5 +42,9 @@ public class NoteController : MonoBehaviour
         firstPersonController.CanMove = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        noteWithoutOutline.SetActive(true);
+        lanternOutline.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

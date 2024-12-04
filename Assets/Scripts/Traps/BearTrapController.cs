@@ -19,7 +19,7 @@ public class BearTrapController : MonoBehaviour
             animator.Play("Beartrap");
 
             // Damage the player
-            playerController.TakeDamage(50);
+            playerController.TakeDamage(70);
             playerController.isHurtLegs = true;
         }
     }

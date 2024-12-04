@@ -15,6 +15,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private bool canSprint = true;
     [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool canUseHeadbob = true;
+    [SerializeField] private bool useFootsteps = true;
 
     [Header("Health Parameters")]
     [SerializeField] private Material screenDamageMaterial;

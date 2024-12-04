@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool hasNote = false;
 
     [Header("Global Variables")]
+    [SerializeField] private GameObject finishObject;
     [SerializeField] private Light nightLight;
     [SerializeField] private float lightIntensityStart = 0.35f;
     [SerializeField] private float lightIntensityEnd = 0.05f;
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     public bool isGameOver = false;
 
+    [Header("Barrier")]
+    [SerializeField] private GameObject barrierObject;
 
     [Header("Books")]
     public int booksCollected = 0;
@@ -47,6 +50,14 @@ public class GameManager : MonoBehaviour
     private void Update() {
         if (booksCollected >= 1) {
             isFirstBook = false;
+        }
+
+        if (hasLantern) {
+            barrierObject.SetActive(false);
+        }
+
+        if (booksCollected >= totalBooks) {
+            finishObject.SetActive(true);
         }
     }
 

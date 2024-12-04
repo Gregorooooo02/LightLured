@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class FadeScreen : MonoBehaviour
 {
@@ -9,12 +10,14 @@ public class FadeScreen : MonoBehaviour
     public static bool FadeCompleted;
 
     [SerializeField] private float speed = 1;
-
     [SerializeField] private Material ScreenMaterial;
+    [SerializeField] private AudioMixer audioMixer;
 
     private float FadeTime {
         set {
             ScreenMaterial.SetFloat("_FadeTime", value);
+            audioMixer.SetFloat("_Ambience", Mathf.Lerp(0, -80, value));
+            audioMixer.SetFloat("_Effects", Mathf.Lerp(0, -10, value));
         }
     }
 
