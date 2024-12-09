@@ -8,6 +8,9 @@ TagManager:
   - LanternLight
   - Reach
   - Interactable
+  - Footsteps/Grass
+  - Footsteps/Wood
+  - Footsteps/Stone
   layers:
   - Default
   - TransparentFX

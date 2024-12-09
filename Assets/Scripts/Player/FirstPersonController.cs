@@ -62,6 +62,17 @@ public class FirstPersonController : MonoBehaviour
     private float defaultYPos = 0;
     private float timer = 0;
 
+    [Header("Footstep Parameters")]
+    [SerializeField] private float baseStepSpeed = 0.5f;
+    [SerializeField] private float crouchStepMultiplier = 1.5f;
+    [SerializeField] private float sprintStepMultiplier = 0.6f;
+    [SerializeField] private AudioSource footstepAudioSource = default;
+    [SerializeField] private AudioClip[] woodClips = default;
+    [SerializeField] private AudioClip[] stoneClips = default;
+    [SerializeField] private AudioClip[] grassClips = default;
+    private float footstepTimer = 0.0f;
+    private float GetCurrentOffset => isCrouching ? baseStepSpeed * crouchStepMultiplier : isSprinting ? baseStepSpeed * sprintStepMultiplier : baseStepSpeed;
+
     private Camera playerCamera;
     private CharacterController characterController;
 
@@ -96,6 +107,10 @@ public class FirstPersonController : MonoBehaviour
 
             if (canUseHeadbob) {
                 HandleHeadbob();
+            }
+
+            if (useFootsteps) {
+                HandleFootsteps();
             }
 
             ApplyFinalMovements();
@@ -214,6 +229,34 @@ public class FirstPersonController : MonoBehaviour
                 defaultYPos + Mathf.Sin(timer) * (isSprinting ? sprintBobAmount : isCrouching ? crouchBobAmount : walkBobAmount),
                 playerCamera.transform.localPosition.z
             );
+        }
+    }
+
+    private void HandleFootsteps() {
+        if (!characterController.isGrounded) return;
+        if (currentInput == Vector2.zero) return;
+
+        footstepTimer -= Time.deltaTime;
+
+        if (footstepTimer <= 0) {
+            if (Physics.Raycast(characterController.transform.position, Vector3.down, out RaycastHit hit, 4)) {
+                switch (hit.collider.tag) {
+                    case "Footsteps/Grass":
+                        footstepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
+                        break;
+                    case "Footsteps/Wood":
+                        footstepAudioSource.PlayOneShot(woodClips[Random.Range(0, woodClips.Length - 1)]);
+                        break;
+                    case "Footsteps/Stone":
+                        footstepAudioSource.PlayOneShot(stoneClips[Random.Range(0, stoneClips.Length - 1)]);
+                        break;
+                    default:
+                        footstepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
+                        break;
+                }
+            }
+
+            footstepTimer = GetCurrentOffset;
         }
     }
 

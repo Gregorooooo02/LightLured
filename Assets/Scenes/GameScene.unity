@@ -1062,6 +1062,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: blood1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 358b75ea5451cf143ab19029a189097d, type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 358b75ea5451cf143ab19029a189097d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.203
@@ -26476,6 +26480,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04c36f15bbecd854cab50deedb5c594f, type: 3}
+--- !u!1001 &550294294
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 161288, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_Name
+      value: Cabin1_Stairs
+      objectReference: {fileID: 0}
+    - target: {fileID: 161288, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/Wood
+      objectReference: {fileID: 0}
+    - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.18121016
+      objectReference: {fileID: 0}
+    - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.495
+      objectReference: {fileID: 0}
+    - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.2995878
+      objectReference: {fileID: 0}
+    - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.60876137
+      objectReference: {fileID: 0}
+    - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000013304902
+      objectReference: {fileID: 0}
+    - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.79335344
+      objectReference: {fileID: 0}
+    - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000001733929
+      objectReference: {fileID: 0}
+    - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 105
+      objectReference: {fileID: 0}
+    - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
 --- !u!1001 &563888859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35099,7 +35164,7 @@ GameObject:
   - component: {fileID: 665845857}
   m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Footsteps/Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
@@ -35771,6 +35836,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b984c0e74a01249e99136416848a74d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &687693146
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530233264}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &688387770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37306,7 +37467,7 @@ GameObject:
   - component: {fileID: 733106289}
   m_Layer: 0
   m_Name: CottageHouseMain
-  m_TagString: Untagged
+  m_TagString: Footsteps/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41432,6 +41593,10 @@ PrefabInstance:
     - target: {fileID: 126568, guid: bbe3e65d308bf7b4bba358ca68dac3f9, type: 3}
       propertyPath: m_Name
       value: Cabin1_Door_A (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 126568, guid: bbe3e65d308bf7b4bba358ca68dac3f9, type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/Wood
       objectReference: {fileID: 0}
     - target: {fileID: 458786, guid: bbe3e65d308bf7b4bba358ca68dac3f9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55640,13 +55805,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cabin1_DM
       objectReference: {fileID: 0}
+    - target: {fileID: 110802, guid: 89f79f1bf5f167d4298cf43d900f56c1, type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 499692, guid: 89f79f1bf5f167d4298cf43d900f56c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.66
       objectReference: {fileID: 0}
     - target: {fileID: 499692, guid: 89f79f1bf5f167d4298cf43d900f56c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.41
+      value: -0.99
       objectReference: {fileID: 0}
     - target: {fileID: 499692, guid: 89f79f1bf5f167d4298cf43d900f56c1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -59406,7 +59575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 485384, guid: fe816015a58e629439b27ecca9cdb110, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.99970055
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 485384, guid: fe816015a58e629439b27ecca9cdb110, type: 3}
       propertyPath: m_LocalPosition.z
@@ -60618,7 +60787,7 @@ GameObject:
   - component: {fileID: 1256952762}
   m_Layer: 0
   m_Name: Cabin
-  m_TagString: Untagged
+  m_TagString: Footsteps/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63657,6 +63826,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: blood2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: cfc7596704bbd7f489156fcd4c05c7e9, type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cfc7596704bbd7f489156fcd4c05c7e9, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.31479314
@@ -65322,6 +65495,10 @@ PrefabInstance:
     - target: {fileID: 153074, guid: 6343c751e9aa748478696f15afed9481, type: 3}
       propertyPath: m_Name
       value: Prop_Chair_B
+      objectReference: {fileID: 0}
+    - target: {fileID: 153074, guid: 6343c751e9aa748478696f15afed9481, type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/Wood
       objectReference: {fileID: 0}
     - target: {fileID: 487332, guid: 6343c751e9aa748478696f15afed9481, type: 3}
       propertyPath: m_LocalPosition.x
@@ -68701,7 +68878,7 @@ GameObject:
   - component: {fileID: 1455006396}
   m_Layer: 0
   m_Name: Decals
-  m_TagString: Untagged
+  m_TagString: Footsteps/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68715,7 +68892,7 @@ Transform:
   m_GameObject: {fileID: 1455006395}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.423, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -71956,6 +72133,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Lamp_B
       objectReference: {fileID: 0}
+    - target: {fileID: 100346, guid: 0be8dee6ec685e54080e3e3cb3c0101b, type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 489576, guid: 0be8dee6ec685e54080e3e3cb3c0101b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.7
@@ -71974,7 +72155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 489576, guid: 0be8dee6ec685e54080e3e3cb3c0101b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.0850406
+      value: 4.547
       objectReference: {fileID: 0}
     - target: {fileID: 489576, guid: 0be8dee6ec685e54080e3e3cb3c0101b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -72032,6 +72213,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 396797608}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100346, guid: 0be8dee6ec685e54080e3e3cb3c0101b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1693268364}
     - targetCorrespondingSourceObject: {fileID: 100346, guid: 0be8dee6ec685e54080e3e3cb3c0101b,
         type: 3}
       insertIndex: -1
@@ -79488,6 +79673,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightSource: {fileID: 1570320991}
   lightSparks: {fileID: 396797610}
+  scareAnimator: {fileID: 1693268364}
+--- !u!95 &1693268364
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693268361}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: da666137684564623aa6cbb657fcf07e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1693305494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81122,6 +81329,10 @@ PrefabInstance:
     - target: {fileID: 122088, guid: 210d38b43ba064d418e74fe6c3791d87, type: 3}
       propertyPath: m_Name
       value: Prop_Rug_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 122088, guid: 210d38b43ba064d418e74fe6c3791d87, type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/Wood
       objectReference: {fileID: 0}
     - target: {fileID: 418962, guid: 210d38b43ba064d418e74fe6c3791d87, type: 3}
       propertyPath: m_LocalScale.x
@@ -87228,6 +87439,10 @@ PrefabInstance:
     - target: {fileID: 121634, guid: 3852c07710f30b64c9aea4fdd03eb915, type: 3}
       propertyPath: m_Name
       value: Struct_WoodPath_A (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 121634, guid: 3852c07710f30b64c9aea4fdd03eb915, type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/Wood
       objectReference: {fileID: 0}
     - target: {fileID: 402812, guid: 3852c07710f30b64c9aea4fdd03eb915, type: 3}
       propertyPath: m_LocalPosition.x
@@ -94817,6 +95032,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Struct_WoodPath_A
       objectReference: {fileID: 0}
+    - target: {fileID: 171060, guid: 3852c07710f30b64c9aea4fdd03eb915, type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 402812, guid: 3852c07710f30b64c9aea4fdd03eb915, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.030306816
@@ -100241,6 +100460,216 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: walkBobSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: baseStepSpeed
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: crouchBobSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: footstepAudioSource
+      value: 
+      objectReference: {fileID: 687693146}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: crouchStepMultiplier
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: sprintStepMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: stoneClips.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8e001351cd7065543a068386cde4c960, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: c41fb169b2991c247a5466e00faa6639, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 76c66b3ae15685a45a334b0628d1edd1, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: cb9aa4db4b3a12147bf2fe3d88fee270, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e832dbb2c7c9ba4e97fd3005fe850b7, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3af6e561e364a274aa306461461c386b, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 30668cf6c5cbfef478b0812fc59eb646, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: eea9624d96ae191439615ca598fe01fa, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: a45bdfd5056ed1d4d8f667cc2498ca12, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: woodClips.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: ec4bd5988d7de0c41ab2d9959705dd8b, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 33d23eef6cc170546a3c9ce3c9bef1f4, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ba5fb80a58d03741b65a691dc434897, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: adf6356301a9fc14aaa03c2cfac83816, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5ad92c54c3f49654db8d62382e5f559b, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: c73956075c85d384a891d9da3762e5c9, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: a9e685e1af34121498a651c484426703, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 09305e4eb78a4cf4ebee70c4b976fa18, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: a1d0e2d83ca2030428f1c772f47b9087, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: ff032cb5e57bd114ea87189c2ed8b3c9, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: ba6029ca248ff2247a1a9ca238be48ff, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: stoneClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f0199a4c6005ec4abbb302f71bc036d, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: stoneClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 53e2adf2ac488ef46bb2b4074de9e363, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: stoneClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a03a96c5d1e99b4409ddd79098abd9ab, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: stoneClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7187dc81f98b8be4eb97bfc4dd9a5abf, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: stoneClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: e3cfcb32689b274419ac73380ea96888, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: stoneClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 314d37dfb74502a4094b835d0e0d6c23, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: stoneClips.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: f0f794c67e9233d468a38d165590d253, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: stoneClips.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1a7741daba5446e46a40f8074aae75dc, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: stoneClips.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bc66974c41ff8c4fa15f46d21ad3548, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[10]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3642dbceb97dc5d419752955421aca54, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[11]
+      value: 
+      objectReference: {fileID: 8300000, guid: b4b126977b28e1d499d8f7f7c580d488, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[12]
+      value: 
+      objectReference: {fileID: 8300000, guid: c79fa9a699dd93647a0729d726adb632, type: 3}
+    - target: {fileID: 2706688785773295596, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      propertyPath: grassClips.Array.data[13]
+      value: 
+      objectReference: {fileID: 8300000, guid: e41709e0fc1f25449a1e6290e3da9b87, type: 3}
     - target: {fileID: 2715490084067040385, guid: e5fc759eab44341bdba454a49511d2f3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -100410,6 +100839,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1797573762}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5844255931708058833, guid: e5fc759eab44341bdba454a49511d2f3,
+        type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 687693146}
     - targetCorrespondingSourceObject: {fileID: 7406066107804701305, guid: e5fc759eab44341bdba454a49511d2f3,
         type: 3}
       insertIndex: -1
@@ -100524,7 +100957,7 @@ PrefabInstance:
     - target: {fileID: 3953227931221703055, guid: d8e6aee6de610420dade1ad8fa4f770d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7490001
+      value: 1.168
       objectReference: {fileID: 0}
     - target: {fileID: 3953227931221703055, guid: d8e6aee6de610420dade1ad8fa4f770d,
         type: 3}
@@ -101080,3 +101513,4 @@ SceneRoots:
   - {fileID: 1888974034}
   - {fileID: 117246018}
   - {fileID: 2115315623}
+  - {fileID: 550294294}
