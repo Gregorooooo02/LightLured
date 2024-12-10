@@ -73,6 +73,14 @@ public class FirstPersonController : MonoBehaviour
     private float footstepTimer = 0.0f;
     private float GetCurrentOffset => isCrouching ? baseStepSpeed * crouchStepMultiplier : isSprinting ? baseStepSpeed * sprintStepMultiplier : baseStepSpeed;
 
+    [Header("Damage Sounds Parameters")]
+    [SerializeField] private float breathingInterval = 2.0f;
+    [SerializeField] private AudioSource breathingAudioSource = default;
+    [SerializeField] private AudioClip[] breathingClips = default;
+    [SerializeField] private AudioSource hurtAudioSource = default;
+    [SerializeField] private AudioClip[] hurtClips = default;
+    private float breathingTimer = 0.0f;
+
     private Camera playerCamera;
     private CharacterController characterController;
 
@@ -120,7 +128,8 @@ public class FirstPersonController : MonoBehaviour
     private void FixedUpdate() {
         if (hasHealth) {
             if (currentHealth > -50) {
-                RegenerateHealth();    
+                RegenerateHealth();
+                HandleHurtSound();
             }
             else {
                 currentHealth = -50;
@@ -170,6 +179,9 @@ public class FirstPersonController : MonoBehaviour
 
         // Shake the camera with a random offset
         StartCoroutine(CameraShake(0.1f, 0.2f));
+
+        // Play a random hurt sound
+        hurtAudioSource.PlayOneShot(hurtClips[Random.Range(0, hurtClips.Length - 1)]);
     }
 
     private IEnumerator CameraShake(float duration, float magnitude) {
@@ -257,6 +269,17 @@ public class FirstPersonController : MonoBehaviour
             }
 
             footstepTimer = GetCurrentOffset;
+        }
+    }
+
+    private void HandleHurtSound() {
+        breathingAudioSource.volume = Mathf.Clamp(1 - (currentHealth / maxHealth), 0.0f, 0.6f);
+
+        breathingTimer -= Time.deltaTime;
+
+        if (breathingTimer <= 0) {
+            breathingAudioSource.PlayOneShot(breathingClips[Random.Range(0, breathingClips.Length - 1)]);
+            breathingTimer = breathingInterval;
         }
     }
 

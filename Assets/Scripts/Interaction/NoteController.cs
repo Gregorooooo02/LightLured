@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class NoteController : MonoBehaviour
 {
+    private AudioSource noteAudioSource;
+
     [Header("Game Objects")]
     [SerializeField] private GameObject noteWithoutOutline;
     [SerializeField] private GameObject lanternOutline;
@@ -19,10 +21,12 @@ public class NoteController : MonoBehaviour
     [SerializeField] private FirstPersonController firstPersonController;
 
     private void Awake() {
+        noteAudioSource = GetComponent<AudioSource>();
         volume.profile.TryGet(out depthOfField);
     }
 
     public void OpenNote() {
+        noteAudioSource.Play();
         GameManager.instance.CollectNote();
         
         noteImage.gameObject.SetActive(true);

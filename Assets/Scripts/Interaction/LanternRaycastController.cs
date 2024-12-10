@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class LanternRaycastController : MonoBehaviour
 {
+    private AudioSource lanternAudioSource;
     public bool lanternGrabbed = false;
+
+    private void Awake() {
+        lanternAudioSource = GetComponent<AudioSource>();
+    }
 
     public void GrabLantern() {
         GameManager.instance.CollectLantern();
@@ -14,6 +19,7 @@ public class LanternRaycastController : MonoBehaviour
         lanternGrabbed = !lanternGrabbed;
 
         if (lanternGrabbed) {
+            lanternAudioSource.Play();
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
             foreach (Transform child in transform) {

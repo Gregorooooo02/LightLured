@@ -28,6 +28,10 @@ public class LanternController : MonoBehaviour
     [SerializeField] private float cooldownTime = 1f;
     private bool canToggleLantern = true;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource lanternAudioSource;
+    [SerializeField] private AudioClip[] lanternOnOffSounds;
+
     private Coroutine lightCoroutine;
     private Coroutine additionalLightCoroutine;
 
@@ -69,11 +73,13 @@ public class LanternController : MonoBehaviour
             additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, additionalLightIntensity));
 
             lanternAnimator.Play("TurnOn");
+            lanternAudioSource.PlayOneShot(lanternOnOffSounds[0]);
         } else {
             lightCoroutine = StartCoroutine(GradualLightChange(lanternLight, 0f));
             additionalLightCoroutine = StartCoroutine(GradualLightChange(additionalLight, 0f));
 
             lanternAnimator.Play("Hide");
+            lanternAudioSource.PlayOneShot(lanternOnOffSounds[1]);
         }
 
         yield return new WaitForSeconds(cooldownTime);

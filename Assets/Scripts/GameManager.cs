@@ -35,12 +35,20 @@ public class GameManager : MonoBehaviour
     public float textDuration = 3f;
     public float transparencySpeed = 0.1f;
 
+    [Header("Heartbeat Audio")]
+    [SerializeField] private AudioSource heartbeatAudio;
+    [SerializeField] private float heartbeatVolume = 0.2f;
+    [SerializeField] private AudioClip[] heartbeats = default;
+
     private void Awake() {
         if (instance == null) {
             instance = this;
 
             numberOfBooksText.SetActive(false);
             nightLight.intensity = lightIntensityStart;
+
+            heartbeatAudio.volume = heartbeatVolume;
+            heartbeatAudio.loop = true;
         }
         else {
             Destroy(gameObject);
@@ -50,6 +58,11 @@ public class GameManager : MonoBehaviour
     private void Update() {
         if (booksCollected >= 1) {
             isFirstBook = false;
+
+            if (!heartbeatAudio.isPlaying) {
+                heartbeatAudio.clip = heartbeats[booksCollected - 1];
+                heartbeatAudio.Play();
+            }
         }
 
         if (hasLantern) {

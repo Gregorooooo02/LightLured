@@ -30,7 +30,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float wanderSpeed = 2f;
 
     [Header("Booleans")]
-    private bool isWandering = false;
+    public bool isWandering = false;
+    public bool isChasing = false;
+    public bool isFasterChasing = false;
     public bool isTargetingPlayer = false;
     private bool hasAttacked = false;
 
@@ -40,6 +42,21 @@ public class EnemyController : MonoBehaviour
 
     [Header("Chase Settings")]
     [SerializeField] private float overshootDistance = 5f;
+
+    [Header("Footstep Parameters")]
+    [SerializeField] private float wanderStepSpeed = 0.5f;
+    [SerializeField] private float chaseStepMultiplier = 0.3f;
+    [SerializeField] private float fasterChaseStepMultiplier = 0.2f;
+    [SerializeField] private AudioSource footstepAudioSource;
+    [SerializeField] private AudioClip[] woodClips;
+    [SerializeField] private AudioClip[] stoneClips;
+    [SerializeField] private AudioClip[] grassClips;
+    private float footstepTimer = 0.0f;
+    private float GetCurrentOffset => isChasing ? wanderStepSpeed * chaseStepMultiplier : isFasterChasing ? wanderStepSpeed * fasterChaseStepMultiplier : wanderStepSpeed;
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource screamAudioSource;
+    [SerializeField] private AudioClip[] screamClips;
 
     private bool isScreamingCoroutine = false;
     private bool isAttacking = false;
@@ -96,6 +113,8 @@ public class EnemyController : MonoBehaviour
             if (!isWandering) {
                 StartCoroutine(Wander());
                 isWandering = true;
+                isChasing = false;
+                isFasterChasing = false;
                 isTargetingPlayer = false;
             }
 
@@ -112,6 +131,8 @@ public class EnemyController : MonoBehaviour
             timeToTarget = 0.0f;
             time = 0.0f;
         }
+
+        HandleFootsteps();
     }
 
     private void TeleportToRandomPoint() {
@@ -127,6 +148,7 @@ public class EnemyController : MonoBehaviour
     }
 
     private IEnumerator ScreamAndTarget() {
+        screamAudioSource.PlayOneShot(screamClips[Random.Range(0, screamClips.Length - 1)]);
         isTargetingPlayer = true;
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
 
@@ -155,11 +177,43 @@ public class EnemyController : MonoBehaviour
 
             agent.SetDestination(extendedTarget);
             agent.speed = (time >= aggroTime) ? fasterChaseSpeed : chaseSpeed;
+            isChasing = true;
+            isFasterChasing = time >= aggroTime;
             
             // If in attack range and hasn't attacked yet, attack the player
             if (distanceToTarget <= attackRange) {
                 StartCoroutine(AttackPlayer());
             }
+        }
+    }
+
+    private void HandleFootsteps() {
+        // If the agent is stopped, don't play footsteps
+        if (agent.isStopped) return;
+        // If the agent is not moving, don't play footsteps
+        if (agent.velocity.magnitude <= 0) return;        
+
+        footstepTimer -= Time.deltaTime;
+
+        if (footstepTimer <= 0) {
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 4)) {
+                switch (hit.collider.tag) {
+                    case "Footsteps/Grass":
+                        footstepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
+                        break;
+                    case "Footsteps/Wood":
+                        footstepAudioSource.PlayOneShot(woodClips[Random.Range(0, woodClips.Length - 1)]);
+                        break;
+                    case "Footsteps/Stone":
+                        footstepAudioSource.PlayOneShot(stoneClips[Random.Range(0, stoneClips.Length - 1)]);
+                        break;
+                    default:
+                        footstepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
+                        break;
+                }
+            }
+
+            footstepTimer = GetCurrentOffset;
         }
     }
 

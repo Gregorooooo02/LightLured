@@ -7,6 +7,11 @@ public class BookController : MonoBehaviour
     public bool bookGrabbed = false;
 
     [SerializeField] private GameObject enemyToActivate;
+    private AudioSource bookAudioSource;
+
+    private void Awake() {
+        bookAudioSource = GetComponent<AudioSource>();
+    }
 
     public void GrabBook() {
         StartCoroutine(GameManager.instance.CollectBookCoroutine());
@@ -18,6 +23,7 @@ public class BookController : MonoBehaviour
         bookGrabbed = !bookGrabbed;
 
         if (bookGrabbed) {
+            bookAudioSource.Play();
             gameObject.GetComponent<BoxCollider>().enabled = false;
             foreach (Transform child in transform) {
                 child.gameObject.SetActive(false);
