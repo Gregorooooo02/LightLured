@@ -26898,7 +26898,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1256952762}
     m_Modifications:
     - target: {fileID: 161288, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
       propertyPath: m_Name
@@ -26910,15 +26910,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.18121016
+      value: -3.5212102
       objectReference: {fileID: 0}
     - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.495
+      value: 0.074
       objectReference: {fileID: 0}
     - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2995878
+      value: -1.8525878
       objectReference: {fileID: 0}
     - target: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247, type: 3}
       propertyPath: m_LocalRotation.w
@@ -61711,6 +61711,7 @@ Transform:
   - {fileID: 1121571571}
   - {fileID: 1455006396}
   - {fileID: 1536629528}
+  - {fileID: 1950939153}
   m_Father: {fileID: 733106289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1258071288
@@ -82056,7 +82057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1702218296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90418,6 +90419,7 @@ MonoBehaviour:
   lightIntensityEnd: 0.01
   isPaused: 0
   isGameOver: 0
+  isGameWon: 0
   barrierObject: {fileID: 546067198}
   booksCollected: 0
   totalBooks: 5
@@ -94152,6 +94154,12 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1950939153 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 494148, guid: 2bf6f50fca3051b4e89bd91d63c3f247,
+    type: 3}
+  m_PrefabInstance: {fileID: 550294294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1952132693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103603,6 +103611,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
+    - target: {fileID: 6050609969193445243, guid: ad34d8b50023749e7ae05e0e4078411a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7853247858151822350, guid: ad34d8b50023749e7ae05e0e4078411a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103701,4 +103714,3 @@ SceneRoots:
   - {fileID: 117246018}
   - {fileID: 2115315623}
   - {fileID: 1792602559}
-  - {fileID: 550294294}

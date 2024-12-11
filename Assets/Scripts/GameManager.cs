@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public bool isPaused = false;
     public bool isGameOver = false;
+    public bool isGameWon = false;
 
     [Header("Barrier")]
     [SerializeField] private GameObject barrierObject;

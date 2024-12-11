@@ -73,66 +73,68 @@ public class EnemyController : MonoBehaviour
     }
 
     private void Update() {
-        float distanceToTarget = Vector3.Distance(target.position, transform.position);
-        bool isLanternOn = lanternLight.intensity > 0;
+        if (!GameManager.instance.isGameWon) {
+            float distanceToTarget = Vector3.Distance(target.position, transform.position);
+            bool isLanternOn = lanternLight.intensity > 0;
 
-        if (distanceToTarget > playerTooFarDistance) {
-            TeleportToRandomPoint();
+            if (distanceToTarget > playerTooFarDistance) {
+                TeleportToRandomPoint();
+            }
+
+            if (isLanternOn) {
+                timeToTarget += Time.deltaTime;
+
+                float timeToAggro = Random.Range(3f, 6f);
+
+                if (timeToTarget >= timeToAggro / 1.5f) {
+                    // Agent should stop moving when it's targeting the player
+                    StopCoroutine(Wander());
+                    agent.SetDestination(transform.position);
+                }
+                if (timeToTarget >= timeToAggro && !isScreamingCoroutine) {
+                    StartCoroutine(ScreamAndTarget());
+                    isWandering = false;
+                }
+
+                if (isScreamingCoroutine) {
+                    ChasePlayer(distanceToTarget);
+                }
+            }
+            else {
+                if (isScreamingCoroutine) {
+                    StopCoroutine(ScreamAndTarget());
+                    isScreamingCoroutine = false;
+                }
+
+                if (isAttacking) {
+                    StopCoroutine(AttackPlayer());
+                    StartCoroutine(ResetAttackState());
+                }
+
+                if (!isWandering) {
+                    StartCoroutine(Wander());
+                    isWandering = true;
+                    isChasing = false;
+                    isFasterChasing = false;
+                    isTargetingPlayer = false;
+                }
+
+                // If the player is too close to the enemy, attack the player
+                if (!isAttacking && distanceToTarget <= attackRange) {
+                    StartCoroutine(AttackPlayer());
+                }
+
+                // Check if the agent is at the position of the target - if so, reset the isTargetinPlayer
+                if (Vector3.Distance(transform.position, target.position) < 1f) {
+                    isTargetingPlayer = false;
+                }
+                
+                timeToTarget = 0.0f;
+                time = 0.0f;
+            }
+
+            HandleFootsteps();
         }
-
-        if (isLanternOn) {
-            timeToTarget += Time.deltaTime;
-
-            float timeToAggro = Random.Range(3f, 6f);
-
-            if (timeToTarget >= timeToAggro / 1.5f) {
-                // Agent should stop moving when it's targeting the player
-                StopCoroutine(Wander());
-                agent.SetDestination(transform.position);
-            }
-            if (timeToTarget >= timeToAggro && !isScreamingCoroutine) {
-                StartCoroutine(ScreamAndTarget());
-                isWandering = false;
-            }
-
-            if (isScreamingCoroutine) {
-                ChasePlayer(distanceToTarget);
-            }
-        }
-        else {
-            if (isScreamingCoroutine) {
-                StopCoroutine(ScreamAndTarget());
-                isScreamingCoroutine = false;
-            }
-
-            if (isAttacking) {
-                StopCoroutine(AttackPlayer());
-                StartCoroutine(ResetAttackState());
-            }
-
-            if (!isWandering) {
-                StartCoroutine(Wander());
-                isWandering = true;
-                isChasing = false;
-                isFasterChasing = false;
-                isTargetingPlayer = false;
-            }
-
-            // If the player is too close to the enemy, attack the player
-            if (!isAttacking && distanceToTarget <= attackRange) {
-                StartCoroutine(AttackPlayer());
-            }
-
-            // Check if the agent is at the position of the target - if so, reset the isTargetinPlayer
-            if (Vector3.Distance(transform.position, target.position) < 1f) {
-                isTargetingPlayer = false;
-            }
-            
-            timeToTarget = 0.0f;
-            time = 0.0f;
-        }
-
-        HandleFootsteps();
     }
 
     private void TeleportToRandomPoint() {
