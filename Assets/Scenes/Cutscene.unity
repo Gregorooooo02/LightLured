@@ -315,8 +315,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: I love you!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 57226a5e543a14fc7ac1f3dfbea14fdb, type: 2}
+  m_sharedMaterial: {fileID: 4905565630025673667, guid: 57226a5e543a14fc7ac1f3dfbea14fdb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -340,8 +341,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1786,8 +1787,9 @@ MonoBehaviour:
   m_text: Hi honey! I'm so sorry I disappeared so suddenly. My grandma got really
     sick and I had to drive to her as soon as possible.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 57226a5e543a14fc7ac1f3dfbea14fdb, type: 2}
+  m_sharedMaterial: {fileID: 4905565630025673667, guid: 57226a5e543a14fc7ac1f3dfbea14fdb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1811,8 +1813,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2101,8 +2103,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: I promise you, I'll be back in a few days.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 57226a5e543a14fc7ac1f3dfbea14fdb, type: 2}
+  m_sharedMaterial: {fileID: 4905565630025673667, guid: 57226a5e543a14fc7ac1f3dfbea14fdb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2126,8 +2129,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2506,6 +2509,8 @@ PlayableDirector:
   - key: {fileID: -8386750505290855908, guid: 4296a4ef3939e41cc9ee2cae649511ad, type: 2}
     value: {fileID: 769267098}
   - key: {fileID: -7755004914213259048, guid: 4296a4ef3939e41cc9ee2cae649511ad, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8537555743171068350, guid: 4296a4ef3939e41cc9ee2cae649511ad, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SkullBehaviour : MonoBehaviour
@@ -15,6 +14,8 @@ public class SkullBehaviour : MonoBehaviour
     [SerializeField] private float distanceToPlayer;
     [SerializeField] private float particlesCap = 10f;
     private bool isLanternOn;
+
+    private System.Random random = new System.Random();
 
     private void Update() {
         CheckLantern();
@@ -39,7 +40,7 @@ public class SkullBehaviour : MonoBehaviour
             skullLight.enabled = true;
 
             if (!particles.isPlaying)
-                particles.Play();
+                StartCoroutine(SkullParticles());
         }
         else {
             meshRenderer.layer = 7;
@@ -48,5 +49,10 @@ public class SkullBehaviour : MonoBehaviour
             if (particles.isPlaying)
                 particles.Stop();
         }
+    }
+
+    private IEnumerator SkullParticles() {
+        yield return new WaitForSeconds(random.Next(1, 5));
+        particles.Play();
     }
 }

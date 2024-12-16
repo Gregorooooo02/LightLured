@@ -19,6 +19,9 @@ public class NoteController : MonoBehaviour
     private DepthOfField depthOfField = null;
 
     [SerializeField] private FirstPersonController firstPersonController;
+    [SerializeField] private NoteRaycast noteRaycast;
+
+    private bool isLanternOn = false;
 
     private void Awake() {
         noteAudioSource = GetComponent<AudioSource>();
@@ -36,6 +39,9 @@ public class NoteController : MonoBehaviour
         firstPersonController.CanMove = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        
+        // Deactivate the note raycast script
+        noteRaycast.enabled = false;
     }
 
     public void CloseNote() {
@@ -48,7 +54,13 @@ public class NoteController : MonoBehaviour
         Cursor.visible = false;
 
         noteWithoutOutline.SetActive(true);
-        lanternOutline.SetActive(true);
+        if (!isLanternOn) {
+            lanternOutline.SetActive(true);
+            isLanternOn = true;
+        }
         gameObject.SetActive(false);
+
+        // Activate the note raycast script
+        noteRaycast.enabled = true;
     }
 }

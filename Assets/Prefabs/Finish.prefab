@@ -68,8 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88945ff2eb96f46a4b1842b685b505a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finishLight: {fileID: 0}
-  particles: {fileID: 0}
+  finishLight: {fileID: 5894629022133847495}
+  particles: {fileID: 8747043436639224809}
   lanternLight: {fileID: 0}
   player: {fileID: 0}
   distanceToPlayer: 0
@@ -308,7 +308,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -361,7 +361,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 9.328414
+      scalar: 15
       minScalar: 5
       maxCurve:
         serializedVersion: 2

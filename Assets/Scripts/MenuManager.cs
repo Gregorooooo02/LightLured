@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    public void StartGame() {
-
+    private void Awake() {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void ExitGame() {

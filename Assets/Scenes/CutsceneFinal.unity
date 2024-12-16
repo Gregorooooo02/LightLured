@@ -23516,8 +23516,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aefdeca831f3848748211fcca9a06507, type: 2}
-  m_sharedMaterial: {fileID: -7740327081536638548, guid: aefdeca831f3848748211fcca9a06507,
+  m_fontAsset: {fileID: 11400000, guid: 57226a5e543a14fc7ac1f3dfbea14fdb, type: 2}
+  m_sharedMaterial: {fileID: 4905565630025673667, guid: 57226a5e543a14fc7ac1f3dfbea14fdb,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -23527,12 +23527,12 @@ MonoBehaviour:
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
-  m_colorMode: 3
+  m_colorMode: 0
   m_fontColorGradient:
-    topLeft: {r: 0, g: 0, b: 0, a: 1}
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
     topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 0.8784314, b: 0.7764706, a: 1}
-    bottomRight: {r: 1, g: 0.7254902, b: 0.28627452, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
