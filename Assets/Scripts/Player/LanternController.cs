@@ -12,7 +12,7 @@ public class LanternController : MonoBehaviour
     [SerializeField] private Animator lanternAnimator;
 
     [Header("Functional Options")]
-    [SerializeField] private bool turnOnOffLantern = true;
+    [SerializeField] public bool turnOnOffLantern = true;
 
     [Header("Controls")]
     [SerializeField] private KeyCode toggleLanternKey = KeyCode.F;

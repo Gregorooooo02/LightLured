@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float aggroTime = 6.0f;
     [SerializeField] private float time = 0.0f;
     [SerializeField] private float timeToTarget = 0.0f;
+    private float timeToAggro = 0.0f;
     private float lanternIntensity;
 
     [Header("Ranges")]
@@ -84,7 +85,24 @@ public class EnemyController : MonoBehaviour
             if (isLanternOn) {
                 timeToTarget += Time.deltaTime;
 
-                float timeToAggro = Random.Range(3f, 6f);
+                // Increase the aggro time based on the number of books collected
+                switch (GameManager.instance.booksCollected) {
+                    case 1:
+                        timeToAggro = Random.Range(8f, 12f);
+                        break;
+                    case 2:
+                        timeToAggro = Random.Range(6f, 8f);
+                        break;
+                    case 3:
+                        timeToAggro = Random.Range(4f, 7f);
+                        break;
+                    case 4:
+                        timeToAggro = Random.Range(2f, 6f);
+                        break;
+                    case 5:
+                        timeToAggro = Random.Range(0.5f, 4f);
+                        break;
+                }
 
                 if (timeToTarget >= timeToAggro / 1.5f) {
                     // Agent should stop moving when it's targeting the player

@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
     public bool hasNote = false;
 
     [Header("Global Variables")]
+    [SerializeField] private FirstPersonController player;
+    [SerializeField] private LanternController lanternController;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private TextMeshProUGUI sensitivityValue;
+    [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
     [SerializeField] private GameObject finishObject;
     [SerializeField] private Light nightLight;
     [SerializeField] private float lightIntensityStart = 0.35f;
@@ -73,6 +78,15 @@ public class GameManager : MonoBehaviour
         if (booksCollected >= totalBooks) {
             finishObject.SetActive(true);
         }
+
+        if (Input.GetKeyDown(pauseKey) && !isPaused) {
+            PauseGame();
+        }
+
+        string sensitivity = player.lookSpeedX.ToString();
+        // Cut the string to only show the first 3 characters
+        sensitivity = sensitivity.Substring(0, 3);
+        sensitivityValue.text = sensitivity;
     }
 
     public void CollectLantern() {
@@ -123,6 +137,35 @@ public class GameManager : MonoBehaviour
                 child.gameObject.SetActive(true);
             }
         }
+    }
+
+    public void PauseGame() {
+        isPaused = true;
+        if (isPaused) {
+            pauseMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            player.CanMove = false;
+            lanternController.turnOnOffLantern = false;
+            Time.timeScale = 0;
+        }
+    }
+
+    public void ResumeGame() {
+        isPaused = false;
+        if (!isPaused) {
+            pauseMenu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            player.CanMove = true;
+            lanternController.turnOnOffLantern = true;
+            Time.timeScale = 1;
+        }
+    }
+
+    public void BackToMenu() {
+        Time.timeScale = 1;
+        LevelManager.instance.FadeIntoScene(0);
     }
 
     public void ResetGame() {
