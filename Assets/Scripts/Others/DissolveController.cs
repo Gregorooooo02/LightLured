@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class DissolveController : MonoBehaviour
 {
     [SerializeField] public SkinnedMeshRenderer[] skinnedMeshes;
+    [SerializeField] public VisualEffect vfx;
     [SerializeField] public float dissolveRate = 0.0125f;
     [SerializeField] public float refreshRate = 0.025f;
 
@@ -18,6 +20,10 @@ public class DissolveController : MonoBehaviour
                 skinnedMaterials.AddRange(skinnedMeshes[i].materials.ToList());
             }
         }
+
+        if (vfx != null) {
+            vfx.Stop();
+        }
     }
 
     public void StartDissolve() {
@@ -25,6 +31,10 @@ public class DissolveController : MonoBehaviour
     }
 
     public IEnumerator DissolveCoroutine() {
+        if (vfx != null) {
+            vfx.Play();
+        }
+
         if (skinnedMaterials.Count > 0) {
             float counter = 0;
             while (skinnedMaterials[0].GetFloat("_DissolveAmount") < 1) {

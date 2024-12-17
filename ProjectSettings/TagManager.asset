@@ -11,6 +11,7 @@ TagManager:
   - Footsteps/Grass
   - Footsteps/Wood
   - Footsteps/Stone
+  - Trap
   layers:
   - Default
   - TransparentFX

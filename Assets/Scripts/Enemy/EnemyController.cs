@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent agent;
     
     [SerializeField] private Transform target;
+    [SerializeField] private Transform playerTarget;
+    [SerializeField] private Transform currentTarget;
 
     [Header("Lantern")]
     [SerializeField] private Light lanternLight;
@@ -35,6 +37,7 @@ public class EnemyController : MonoBehaviour
     public bool isChasing = false;
     public bool isFasterChasing = false;
     public bool isTargetingPlayer = false;
+    private bool isTargetingTrap = false;
     private bool hasAttacked = false;
 
     [Header("Teleport Settings")]
@@ -70,6 +73,9 @@ public class EnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         lanternIntensity = lanternLight.intensity;
         agent.speed = wanderSpeed;
+
+        playerTarget = target;
+        currentTarget = playerTarget;
     }
 
     private void Start() {
@@ -79,7 +85,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update() {
         if (!GameManager.instance.isGameWon) {
-            float distanceToTarget = Vector3.Distance(target.position, transform.position);
+            float distanceToTarget = Vector3.Distance(currentTarget.position, transform.position);
             bool isLanternOn = lanternLight.intensity > 0;
 
             if (distanceToTarget > playerTooFarDistance) {
@@ -147,7 +153,7 @@ public class EnemyController : MonoBehaviour
                 }
 
                 // Check if the agent is at the position of the target - if so, reset the isTargetinPlayer
-                if (Vector3.Distance(transform.position, target.position) < 1f) {
+                if (Vector3.Distance(transform.position, currentTarget.position) < 1f) {
                     isTargetingPlayer = false;
                 }
                 
@@ -163,12 +169,16 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void SetTrapTarget(Transform trapTransform) {
+        StartCoroutine(ScreamAndTarget());
+    }
+
     private void TeleportToRandomPoint() {
         Vector2 randomPoint = Random.insideUnitCircle.normalized * teleportRadius;
         Vector3 teleportPosition = new Vector3(
-            target.position.x + randomPoint.x,
+            currentTarget.position.x + randomPoint.x,
             transform.position.y,
-            target.position.z + randomPoint.y
+            currentTarget.position.z + randomPoint.y
         );
 
         transform.position = teleportPosition;
@@ -178,7 +188,7 @@ public class EnemyController : MonoBehaviour
     private IEnumerator ScreamAndTarget() {
         screamAudioSource.PlayOneShot(screamClips[Random.Range(0, screamClips.Length - 1)]);
         isTargetingPlayer = true;
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+        transform.LookAt(new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z));
 
         yield return new WaitForSeconds(1f);
         isScreamingCoroutine = true;
@@ -193,15 +203,15 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             Quaternion.LookRotation(
-                new Vector3(target.position.x, transform.position.y, target.position.z) - transform.position
+                new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z) - transform.position
             ).normalized,
             180f * Time.deltaTime
         );
 
         // If in chase range and hasn't attacked, pursue the player
         if (distanceToTarget <= chaseRange && !hasAttacked) {
-            Vector3 directionToPlayer = (target.position - transform.position).normalized;
-            Vector3 extendedTarget = target.position + directionToPlayer * overshootDistance;
+            Vector3 directionToPlayer = (currentTarget.position - transform.position).normalized;
+            Vector3 extendedTarget = currentTarget.position + directionToPlayer * overshootDistance;
 
             agent.SetDestination(extendedTarget);
             agent.speed = (time >= aggroTime) ? fasterChaseSpeed : chaseSpeed;
@@ -260,9 +270,9 @@ public class EnemyController : MonoBehaviour
 
         // Stop the monster and face the player
         agent.isStopped = true;
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+        transform.LookAt(new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z));
         // Perform the attack (e.g., apply damage)
-        target.GetComponent<FirstPersonController>().TakeDamage(75); // Replace with your damage logic
+        currentTarget.GetComponent<FirstPersonController>().TakeDamage(75); // Replace with your damage logic
         // Wait for the post-attack pause
         yield return new WaitForSeconds(postAttackPause);
         // Reset speed to initial chase speed after attack
@@ -270,8 +280,8 @@ public class EnemyController : MonoBehaviour
         // Allow the monster to resume movement
         agent.isStopped = false;
         // Ensure the agent resumes chasing after the attack
-        if (Vector3.Distance(target.position, transform.position) <= chaseRange) {
-            agent.SetDestination(target.position); // Explicitly set the destination again to resume chasing
+        if (Vector3.Distance(currentTarget.position, transform.position) <= chaseRange) {
+            agent.SetDestination(currentTarget.position); // Explicitly set the destination again to resume chasing
         }
         isAttacking = false;
 
@@ -280,7 +290,7 @@ public class EnemyController : MonoBehaviour
     }
 
     private IEnumerator ResetAttackState() {
-        yield return new WaitUntil(() => Vector3.Distance(target.position, transform.position) > attackRange);
+        yield return new WaitUntil(() => Vector3.Distance(currentTarget.position, transform.position) > attackRange);
 
         hasAttacked = false;
         isAttacking = false;
