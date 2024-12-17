@@ -59,6 +59,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private AudioSource screamAudioSource;
     [SerializeField] private AudioClip[] screamClips;
 
+    [SerializeField] private AudioSource idleAudioSource;
+    [SerializeField] private AudioClip[] idleClips;
+    private float idleTime = 7f;
+
     private bool isScreamingCoroutine = false;
     private bool isAttacking = false;
 
@@ -152,6 +156,10 @@ public class EnemyController : MonoBehaviour
             }
 
             HandleFootsteps();
+
+            if (!isChasing) {
+                HandleIdleSounds();
+            }
         }
     }
 
@@ -234,6 +242,15 @@ public class EnemyController : MonoBehaviour
             }
 
             footstepTimer = GetCurrentOffset;
+        }
+    }
+
+    private void HandleIdleSounds() {
+        idleTime -= Time.deltaTime;
+
+        if (idleTime <= 0) {
+            idleAudioSource.PlayOneShot(idleClips[Random.Range(0, idleClips.Length - 1)]);
+            idleTime = 7f;
         }
     }
 
