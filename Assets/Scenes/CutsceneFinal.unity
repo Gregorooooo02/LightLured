@@ -5843,7 +5843,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85504945}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -6124,6 +6124,28 @@ PlayableDirector:
   - key: {fileID: 3781779980155996814, guid: ecb1be21da80746f1b239b6142ba6229, type: 2}
     value: {fileID: 828291980}
   - key: {fileID: 4481842399742800967, guid: ecb1be21da80746f1b239b6142ba6229, type: 2}
+    value: {fileID: 117246019}
+  - key: {fileID: -5243697225353961311, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
+    value: {fileID: 1501320318}
+  - key: {fileID: 1324789293003559598, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
+    value: {fileID: 962457225}
+  - key: {fileID: -6118273427759746888, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
+    value: {fileID: 461628129}
+  - key: {fileID: 2657695165385495292, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
+    value: {fileID: 461628130}
+  - key: {fileID: 217451163146623409, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
+    value: {fileID: 828291976}
+  - key: {fileID: -3734959136481297790, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
+    value: {fileID: 1931914903}
+  - key: {fileID: 3184842672612743805, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
+    value: {fileID: 1931914903}
+  - key: {fileID: 8073259472136905098, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
+    value: {fileID: 2115315622}
+  - key: {fileID: -3555234849724835688, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
+    value: {fileID: 1931914903}
+  - key: {fileID: 3781779980155996814, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
+    value: {fileID: 828291980}
+  - key: {fileID: 4481842399742800967, guid: 991529f0bdbdf4c3caf5c297d441cfae, type: 2}
     value: {fileID: 117246019}
   m_ExposedReferences:
     m_References:
@@ -14354,6 +14376,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 401195271}
     m_Modifications:
+    - target: {fileID: 702783404340493023, guid: 00fb30444464b44d4902ae214e636338,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6846471
+      objectReference: {fileID: 0}
+    - target: {fileID: 702783404340493023, guid: 00fb30444464b44d4902ae214e636338,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.68464696
+      objectReference: {fileID: 0}
+    - target: {fileID: 702783404340493023, guid: 00fb30444464b44d4902ae214e636338,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.17680068
+      objectReference: {fileID: 0}
+    - target: {fileID: 702783404340493023, guid: 00fb30444464b44d4902ae214e636338,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.17680071
+      objectReference: {fileID: 0}
     - target: {fileID: 1862525787183327205, guid: 00fb30444464b44d4902ae214e636338,
         type: 3}
       propertyPath: m_Quality
@@ -30760,7 +30802,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063493197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

@@ -30,7 +30,12 @@ public class NoteController : MonoBehaviour
 
     public void OpenNote() {
         noteAudioSource.Play();
-        GameManager.instance.CollectNote();
+        if (GameManager.instance != null) {
+            GameManager.instance.CollectNote();    
+        }
+        else if (GameManagerNT.instance != null) {
+            GameManagerNT.instance.CollectNote();
+        }
         
         noteImage.gameObject.SetActive(true);
         // Turn on the depth of field effect

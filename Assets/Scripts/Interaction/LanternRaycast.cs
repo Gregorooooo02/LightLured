@@ -35,8 +35,15 @@ public class LanternRaycast : MonoBehaviour
                 isTextActive = true;
                 doOnce = true;
 
-                if (Input.GetKeyDown(interactKey) && !raycastedObject.lanternGrabbed && GameManager.instance.hasNote) {
-                    raycastedObject.GrabLantern();
+                if (GameManager.instance != null) {
+                    if (Input.GetKeyDown(interactKey) && !raycastedObject.lanternGrabbed && GameManager.instance.hasNote) {
+                        raycastedObject.GrabLantern();
+                    }    
+                }
+                else if (GameManagerNT.instance != null) {
+                    if (Input.GetKeyDown(interactKey) && !raycastedObject.lanternGrabbed && GameManagerNT.instance.hasNote) {
+                        raycastedObject.GrabLantern();
+                    }
                 }
             }
         }
@@ -49,16 +56,36 @@ public class LanternRaycast : MonoBehaviour
     }
 
     private void ActivateText(bool activate) {
-        if (activate && !doOnce && !raycastedObject.lanternGrabbed && GameManager.instance.hasNote) {
-            grabText.SetActive(true);
+        if (GameManager.instance != null) {
+            if (GameManager.instance.hasNote) {
+                if (activate && !doOnce && !raycastedObject.lanternGrabbed) {
+                    grabText.SetActive(true);
+                }
+                else if (!raycastedObject.lanternGrabbed) {
+                    grabText.SetActive(false);
+                    isTextActive = false;
+                }
+                else {
+                    grabText.SetActive(false);
+                    isTextActive = false;
+                }
+                
+            }
         }
-        else if (!raycastedObject.lanternGrabbed) {
-            grabText.SetActive(false);
-            isTextActive = false;
-        }
-        else {
-            grabText.SetActive(false);
-            isTextActive = false;
+        else if (GameManagerNT.instance != null) {
+            if (GameManagerNT.instance.hasNote) {
+                if (activate && !doOnce && !raycastedObject.lanternGrabbed) {
+                    grabText.SetActive(true);
+                }
+                else if (!raycastedObject.lanternGrabbed) {
+                    grabText.SetActive(false);
+                    isTextActive = false;
+                }
+                else {
+                    grabText.SetActive(false);
+                    isTextActive = false;
+                }
+            }
         }
     }
 }

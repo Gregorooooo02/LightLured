@@ -24,28 +24,33 @@ public class BookRaycast : MonoBehaviour
 
         int mask = 1 << LayerMask.NameToLayer(excludeLayerName) | layerMaskInteract.value;
 
-        if (GameManager.instance.hasLantern) {
-            if (Physics.Raycast(transform.position, fwd, out hit, rayLength, mask)) {
-                if (hit.collider.CompareTag(interactableTag)) {
-                    if (!doOnce) {
-                        raycastedObject = hit.collider.gameObject.GetComponent<BookController>();
-                        ActivateText(true);
+        if (GameManager.instance != null) {
+            if (GameManager.instance.hasLantern) {
+                if (Physics.Raycast(transform.position, fwd, out hit, rayLength, mask)) {
+                    if (hit.collider.CompareTag(interactableTag)) {
+                        if (!doOnce) {
+                            raycastedObject = hit.collider.gameObject.GetComponent<BookController>();
+                            ActivateText(true);
+                        }
+
+                        isTextActive = true;
+                        doOnce = true;
+
+                        if (Input.GetKeyDown(interactKey) && !raycastedObject.bookGrabbed) {
+                            raycastedObject.GrabBook();
+                        }
                     }
-
-                    isTextActive = true;
-                    doOnce = true;
-
-                    if (Input.GetKeyDown(interactKey) && !raycastedObject.bookGrabbed) {
-                        raycastedObject.GrabBook();
+                }
+                else {
+                    if (isTextActive) {
+                        ActivateText(false);
+                        doOnce = false;
                     }
                 }
             }
-            else {
-                if (isTextActive) {
-                    ActivateText(false);
-                    doOnce = false;
-                }
-            }
+        }
+        else {
+            // Do nothing
         }
     }
 

@@ -12,9 +12,16 @@ public class LanternRaycastController : MonoBehaviour
     }
 
     public void GrabLantern() {
-        GameManager.instance.CollectLantern();
-        StartCoroutine(GameManager.instance.DisplayText(GameManager.instance.obtainedLanternText));
-        StartCoroutine(GameManager.instance.ChangeLightIntensity());
+        if (GameManager.instance != null) {
+            GameManager.instance.CollectLantern();    
+            StartCoroutine(GameManager.instance.DisplayText(GameManager.instance.obtainedLanternText));
+            StartCoroutine(GameManager.instance.ChangeLightIntensity());
+        }
+        else if (GameManagerNT.instance != null) {
+            GameManagerNT.instance.CollectLantern();
+            StartCoroutine(GameManagerNT.instance.DisplayText(GameManagerNT.instance.obtainedLanternText));
+            StartCoroutine(GameManagerNT.instance.ChangeLightIntensity());
+        }
 
         lanternGrabbed = !lanternGrabbed;
 

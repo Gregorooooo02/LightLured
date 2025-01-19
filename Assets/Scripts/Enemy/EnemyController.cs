@@ -84,18 +84,31 @@ public class EnemyController : MonoBehaviour
     }
 
     private void Update() {
-        if (!GameManager.instance.isGameWon) {
-            float distanceToTarget = Vector3.Distance(currentTarget.position, transform.position);
-            bool isLanternOn = lanternLight.intensity > 0;
-
-            if (distanceToTarget > playerTooFarDistance) {
-                TeleportToRandomPoint();
+        if (GameManager.instance != null) {
+            if (!GameManager.instance.isGameWon) {
+                EnemyLanternBehaviour();
             }
+        }
+        else if (GameManagerNT.instance != null) {
+            if (!GameManagerNT.instance.isGameWon) {
+                EnemyLanternBehaviour();
+            }
+        }
+    }
 
-            if (isLanternOn) {
-                timeToTarget += Time.deltaTime;
+    private void EnemyLanternBehaviour() {
+        float distanceToTarget = Vector3.Distance(currentTarget.position, transform.position);
+        bool isLanternOn = lanternLight.intensity > 0;
 
-                // Increase the aggro time based on the number of books collected
+        if (distanceToTarget > playerTooFarDistance) {
+            TeleportToRandomPoint();
+        }
+
+        if (isLanternOn) {
+            timeToTarget += Time.deltaTime;
+
+            // Increase the aggro time based on the number of books collected
+            if (GameManager.instance != null) {
                 switch (GameManager.instance.booksCollected) {
                     case 1:
                         timeToAggro = Random.Range(8f, 12f);
@@ -112,60 +125,63 @@ public class EnemyController : MonoBehaviour
                     case 5:
                         timeToAggro = Random.Range(0.5f, 4f);
                         break;
-                }
-
-                if (timeToTarget >= timeToAggro / 1.5f) {
-                    // Agent should stop moving when it's targeting the player
-                    StopCoroutine(Wander());
-                    agent.SetDestination(transform.position);
-                }
-                if (timeToTarget >= timeToAggro && !isScreamingCoroutine) {
-                    StartCoroutine(ScreamAndTarget());
-                    isWandering = false;
-                }
-
-                if (isScreamingCoroutine) {
-                    ChasePlayer(distanceToTarget);
-                }
+                }    
             }
-            else {
-                if (isScreamingCoroutine) {
-                    StopCoroutine(ScreamAndTarget());
-                    isScreamingCoroutine = false;
-                }
-
-                if (isAttacking) {
-                    StopCoroutine(AttackPlayer());
-                    StartCoroutine(ResetAttackState());
-                }
-
-                if (!isWandering) {
-                    StartCoroutine(Wander());
-                    isWandering = true;
-                    isChasing = false;
-                    isFasterChasing = false;
-                    isTargetingPlayer = false;
-                }
-
-                // If the player is too close to the enemy, attack the player
-                if (!isAttacking && distanceToTarget <= attackRange) {
-                    StartCoroutine(AttackPlayer());
-                }
-
-                // Check if the agent is at the position of the target - if so, reset the isTargetinPlayer
-                if (Vector3.Distance(transform.position, currentTarget.position) < 1f) {
-                    isTargetingPlayer = false;
-                }
-                
-                timeToTarget = 0.0f;
-                time = 0.0f;
+            else if (GameManagerNT.instance != null) {
+                timeToAggro = Random.Range(2f, 12f);
             }
 
-            HandleFootsteps();
-
-            if (!isChasing) {
-                HandleIdleSounds();
+            if (timeToTarget >= timeToAggro / 1.5f) {
+                // Agent should stop moving when it's targeting the player
+                StopCoroutine(Wander());
+                agent.SetDestination(transform.position);
             }
+            if (timeToTarget >= timeToAggro && !isScreamingCoroutine) {
+                StartCoroutine(ScreamAndTarget());
+                isWandering = false;
+            }
+
+            if (isScreamingCoroutine) {
+                ChasePlayer(distanceToTarget);
+            }
+        }
+        else {
+            if (isScreamingCoroutine) {
+                StopCoroutine(ScreamAndTarget());
+                isScreamingCoroutine = false;
+            }
+
+            if (isAttacking) {
+                StopCoroutine(AttackPlayer());
+                StartCoroutine(ResetAttackState());
+            }
+
+            if (!isWandering) {
+                StartCoroutine(Wander());
+                isWandering = true;
+                isChasing = false;
+                isFasterChasing = false;
+                isTargetingPlayer = false;
+            }
+
+            // If the player is too close to the enemy, attack the player
+            if (!isAttacking && distanceToTarget <= attackRange) {
+                StartCoroutine(AttackPlayer());
+            }
+
+            // Check if the agent is at the position of the target - if so, reset the isTargetinPlayer
+            if (Vector3.Distance(transform.position, currentTarget.position) < 1f) {
+                isTargetingPlayer = false;
+            }
+            
+            timeToTarget = 0.0f;
+            time = 0.0f;
+        }
+
+        HandleFootsteps();
+
+        if (!isChasing) {
+            HandleIdleSounds();
         }
     }
 

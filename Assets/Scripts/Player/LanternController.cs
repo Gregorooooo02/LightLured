@@ -45,8 +45,15 @@ public class LanternController : MonoBehaviour
     }
 
     private void Update() {
-        if (turnOnOffLantern && GameManager.instance.hasLantern) {
-            HandleLanternLight();
+        if (GameManager.instance != null) {
+            if (turnOnOffLantern && GameManager.instance.hasLantern) {
+                HandleLanternLight();
+            }    
+        }
+        else if (GameManagerNT.instance != null) {
+            if (turnOnOffLantern && GameManagerNT.instance.hasLantern) {
+                HandleLanternLight();
+            }
         }
     }
 

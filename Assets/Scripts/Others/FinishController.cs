@@ -29,7 +29,12 @@ public class FinishController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
-            GameManager.instance.isGameWon = true;
+            if (GameManager.instance != null) {
+                GameManager.instance.isGameWon = true;
+            }
+            else if (GameManagerNT.instance != null) {
+                GameManagerNT.instance.isGameWon = true;
+            }
             LevelManager.instance.FadeIntoScene(4);
         }
     }
