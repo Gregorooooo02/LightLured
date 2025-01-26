@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FinishController : MonoBehaviour
 {
+    public bool isMechanicOff = false;
+
     [Header("Finish Components")]
     [SerializeField] private Light finishLight;
     [SerializeField] private ParticleSystem particles;
@@ -15,8 +17,15 @@ public class FinishController : MonoBehaviour
     [SerializeField] private float particlesCap = 10f;
     private bool isLanternOn;
 
+    [SerializeField] private int sceneChange;
+
     private void Update() {
-        CheckLantern();
+        if (!isMechanicOff) {
+            CheckLantern();
+        }
+        else {
+            NoMechanicBehaviour();
+        }
     }
 
     private void LateUpdate() {
@@ -35,7 +44,7 @@ public class FinishController : MonoBehaviour
             else if (GameManagerNT.instance != null) {
                 GameManagerNT.instance.isGameWon = true;
             }
-            LevelManager.instance.FadeIntoScene(4);
+            LevelManager.instance.FadeIntoScene(sceneChange);
         }
     }
 
@@ -57,5 +66,11 @@ public class FinishController : MonoBehaviour
             if (particles.isPlaying)
                 particles.Stop();
         }
+    }
+
+    private void NoMechanicBehaviour() {
+        finishLight.enabled = true;
+        if (!particles.isPlaying)
+            particles.Play();
     }
 }

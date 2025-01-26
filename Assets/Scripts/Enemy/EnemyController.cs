@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public bool isWithoutMechanic = false;
+
     private NavMeshAgent agent;
     
     [SerializeField] private Transform target;
@@ -22,6 +24,8 @@ public class EnemyController : MonoBehaviour
 
     [Header("Ranges")]
     [SerializeField] private float chaseRange = 1000000f;
+    [SerializeField] private float chaseRangeNM = 100f;
+    [SerializeField] private float stopChaseRangeNM = 150f;
     [SerializeField] private float attackRange = 10f;
     [SerializeField] private float postAttackPause = 2.0f; // Time to stop after an attack
     [SerializeField] private float wanderRange = 10f;
@@ -84,15 +88,87 @@ public class EnemyController : MonoBehaviour
     }
 
     private void Update() {
-        if (GameManager.instance != null) {
-            if (!GameManager.instance.isGameWon) {
-                EnemyLanternBehaviour();
+        if (!isWithoutMechanic) {
+            if (GameManager.instance != null) {
+                if (!GameManager.instance.isGameWon) {
+                    EnemyLanternBehaviour();
+                }
+            }
+            else if (GameManagerNT.instance != null) {
+                if (!GameManagerNT.instance.isGameWon) {
+                    EnemyLanternBehaviour();
+                }
+            }    
+        }
+        else {
+            EnemyNoMechanicBevahiour();
+        }
+    }
+
+    private void EnemyNoMechanicBevahiour() {
+        // Enemy should target the player, if the player is in the range of the enemy
+        // If the player is too far from the enemy, the enemy should stop chasing the player
+        float distanceToTarget = Vector3.Distance(currentTarget.position, transform.position);
+
+        if (distanceToTarget > playerTooFarDistance) {
+            TeleportToRandomPoint();
+        }
+
+        timeToAggro = 0.5f;
+
+        if (distanceToTarget <= chaseRangeNM) {
+            timeToTarget += Time.deltaTime;
+
+            if (timeToTarget >= timeToAggro / 1.5f) {
+                StopCoroutine(Wander());
+                agent.SetDestination(transform.position);
+            }
+            if (timeToTarget >= timeToAggro && !isScreamingCoroutine) {
+                StartCoroutine(ScreamAndTarget());
+                isWandering = false;
+            }
+
+            if (isScreamingCoroutine) {
+                ChasePlayer(distanceToTarget);
             }
         }
-        else if (GameManagerNT.instance != null) {
-            if (!GameManagerNT.instance.isGameWon) {
-                EnemyLanternBehaviour();
+        else if (distanceToTarget > stopChaseRangeNM) {
+            if (isScreamingCoroutine) {
+                StopCoroutine(ScreamAndTarget());
+                isScreamingCoroutine = false;
             }
+
+            if (isAttacking) {
+                StopCoroutine(AttackPlayer());
+                StartCoroutine(ResetAttackState());
+            }
+
+            if (!isWandering) {
+                StartCoroutine(Wander());
+                isWandering = true;
+                isChasing = false;
+                isFasterChasing = false;
+                isTargetingPlayer = false;
+            }
+
+            // If the player is too close to the enemy, attack the player
+            if (!isAttacking && distanceToTarget <= attackRange) {
+                StartCoroutine(AttackPlayer());
+            }
+
+            // Check if the agent is at the position of the target - if so, reset the isTargetinPlayer
+            if (Vector3.Distance(transform.position, currentTarget.position) < 1f) {
+                isTargetingPlayer = false;
+            }
+            
+            timeToTarget = 0.0f;
+            time = 0.0f;
+        }
+
+        HandleFootsteps();
+
+        if (!isChasing) {
+            HandleIdleSounds();
         }
     }
 
@@ -345,6 +421,7 @@ public class EnemyController : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(3f, 6f));
         }
     }
+    
     private void SmoothRotateTowards(Vector3 targetPosition) {
         Vector3 direction = (targetPosition - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -356,7 +433,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, chaseRange);
+        Gizmos.DrawWireSphere(transform.position, chaseRangeNM);
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, attackRange);

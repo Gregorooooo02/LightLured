@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject barrierObject;
 
     [Header("Books")]
+    public bool shouldBooksWork = false;
     public int booksCollected = 0;
     public int totalBooks = 5;
     [SerializeField] private GameObject numberOfBooksText;
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour
 
     public void CollectLantern() {
         hasLantern = true;
+        shouldBooksWork = true;
         LampScare.instance.StartCoroutine(LampScare.instance.BreakLight());
     }
 
